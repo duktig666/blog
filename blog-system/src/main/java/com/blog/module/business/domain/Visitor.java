@@ -6,6 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,16 +30,19 @@ public class Visitor implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "游客id")
+    @NotNull(message = "游客id不能为空")
     private Long id;
 
     /** 游客昵称 */
     @Column(name="nickname")
     @ApiModelProperty(value = "游客昵称")
+    @NotBlank(message = "游客昵称不能为空")
     private String nickname;
 
     /** 邮箱 */
     @Column(name="email")
     @ApiModelProperty(value = "邮箱")
+    @Email
     private String email;
 
     /** 游客头像 */

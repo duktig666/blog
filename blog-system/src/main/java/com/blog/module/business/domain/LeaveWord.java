@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,16 +29,19 @@ public class LeaveWord implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "留言id")
+    @NotNull(message = "留言id不能为空")
     private Long id;
 
     /** 留言者id */
     @Column(name="visitor_id")
     @ApiModelProperty(value = "留言者id")
+    @NotNull(message = "留言者id不能为空")
     private Long visitorId;
 
     /** 留言内容 */
     @Column(name="leave_content")
     @ApiModelProperty(value = "留言内容")
+    @NotBlank(message = "留言内容不能为空")
     private String leaveContent;
 
     /** 创建时间 */

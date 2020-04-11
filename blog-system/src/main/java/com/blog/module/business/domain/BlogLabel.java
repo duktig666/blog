@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,11 +29,13 @@ public class BlogLabel implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "博客标签id")
+    @NotNull(message = "博客标签id不能为空")
     private Long id;
 
     /** 标签 */
     @Column(name="label")
     @ApiModelProperty(value = "标签")
+    @NotBlank(message = "标签不能为空")
     private String label;
 
     /** 创建时间 */

@@ -4,8 +4,13 @@ import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,11 +32,13 @@ public class Blogger implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "博主id")
+    @NotNull(message = "博客id不能为空")
     private Long id;
 
     /** 博主昵称 */
     @Column(name = "nickname")
     @ApiModelProperty(value = "博主昵称")
+    @NotBlank(message = "博主昵称不能为空")
     private String nickname;
 
     /** 年龄 */
@@ -47,6 +54,7 @@ public class Blogger implements Serializable {
     /** 邮箱 */
     @Column(name = "email")
     @ApiModelProperty(value = "邮箱")
+    @Email
     private String email;
 
     /** 职业 */

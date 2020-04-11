@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -26,16 +28,19 @@ public class Blog  implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "博客id")
+    @NotNull(message = "博客id不能为空")
     private Long id;
 
     /** 所属博客类型id */
     @Column(name="type_id")
     @ApiModelProperty(value = "所属博客类型id")
+    @NotNull(message = "所属博客类型id不能为空")
     private Long typeId;
 
     /** 博客标题 */
     @Column(name="title")
     @ApiModelProperty(value = "博客标题")
+    @NotBlank(message = "博客标题不能为空")
     private String title;
 
     /** 博客摘要 */
@@ -46,6 +51,7 @@ public class Blog  implements Serializable {
     /** 博客正文 */
     @Column(name="content")
     @ApiModelProperty(value = "博客正文")
+    @NotBlank(message = "博客正文不能为空")
     private String content;
 
     /** 浏览量 */

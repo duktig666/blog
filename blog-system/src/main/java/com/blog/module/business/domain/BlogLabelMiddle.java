@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -24,11 +25,13 @@ public class BlogLabelMiddle implements Serializable {
     /** 所属博客id */
     @Column(name="blog_id")
     @ApiModelProperty(value = "所属博客id")
+    @NotNull(message = "所属博客id不能为空")
     private Long blogId;
 
     /** 所属博客标签 */
     @Column(name="label_id")
     @ApiModelProperty(value = "所属博客标签")
+    @NotNull(message = "所属博客标签不能为空")
     private Long labelId;
 
 }

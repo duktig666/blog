@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,26 +29,31 @@ public class Observe implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "评论id")
+    @NotNull(message = "评论id不能为空")
     private Long id;
 
     /** 所属博客id */
     @Column(name="blog_id")
     @ApiModelProperty(value = "所属博客id")
+    @NotNull(message = "所属博客id不能为空")
     private Long blogId;
 
     /** 评论者id */
     @Column(name="observer_id")
     @ApiModelProperty(value = "评论者id")
+    @NotNull(message = "评论者id不能为空")
     private Long observerId;
 
     /** 评论者类型 */
     @Column(name="observer_type")
     @ApiModelProperty(value = "评论者类型")
+    @NotNull(message = "评论者类型不能为空")
     private Integer observerType;
 
     /** 评论内容 */
     @Column(name="observe_content")
     @ApiModelProperty(value = "评论内容")
+    @NotBlank(message = "评论内容不能为空")
     private String observeContent;
 
     /** 评论上一级的id */
