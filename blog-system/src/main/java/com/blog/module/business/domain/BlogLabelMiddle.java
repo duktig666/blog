@@ -1,5 +1,7 @@
 package com.blog.module.business.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -16,14 +18,17 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name="blog_label_middle")
+@ApiModel
 public class BlogLabelMiddle implements Serializable {
 
     /** 所属博客id */
     @Column(name="blog_id")
+    @ApiModelProperty(value = "所属博客id")
     private Long blogId;
 
     /** 所属博客标签 */
     @Column(name="label_id")
+    @ApiModelProperty(value = "所属博客标签")
     private Long labelId;
 
 }
