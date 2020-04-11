@@ -6,8 +6,11 @@ server:
 spring:
   profiles:
     active: dev
+
   jackson:
-    time-zone: GMT+8   # json序列化时区配置
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
   data:
     redis:
       repositories:
