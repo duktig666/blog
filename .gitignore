@@ -2,3 +2,5 @@
 /blog-common/blog-common.iml
 /blog-system/blog-system.iml
 /blog-parent.iml
+/blog-common/target/
+/blog-system/target/
