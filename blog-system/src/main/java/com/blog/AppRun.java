@@ -3,6 +3,7 @@ package com.blog;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -12,7 +13,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Date: 2020/4/11 9:40
  **/
 @MapperScan("com.blog.module.business.mapper")
-@SpringBootApplication //(exclude = {DataSourceAutoConfiguration.class})
+@EnableCaching
+@SpringBootApplication
 public class AppRun {
 
     public static void main ( String[] args ) {
