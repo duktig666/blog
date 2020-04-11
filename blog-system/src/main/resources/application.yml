@@ -48,6 +48,20 @@ spring:
       force: true
       enabled: true
 
+  servlet:
+    multipart:
+      max-file-size: 5MB # 限制文件上传的大小
+
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#FastDFS相关配置
+fdfs:
+  so-timeout: 1501 # 超时时间
+  connect-timeout: 601 # 连接超时时间
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址：你的虚拟机服务器地址+端口（默认是22122）
+    - 118.89.143.27:22122
