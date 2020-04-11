@@ -30,7 +30,6 @@
         <lang3.version>3.4</lang3.version>
         <hutool.version>5.2.5</hutool.version>
         <tk.mybatis.version>2.1.5</tk.mybatis.version>
-
         <lombok.version>1.18.8</lombok.version>
         <pagehelper.version>1.2.12</pagehelper.version>
         <log4jdbc.version>1.16</log4jdbc.version>
@@ -103,6 +102,12 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!-- springboot检测服务启动器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!--    DevTools部署
                 其深层原理是使用了两个ClassLoader，一个Classloader加载那些不会改变
             的类（第三方Jar包），另一个ClassLoader加载会更改的类，称为 restart C
@@ -118,14 +123,6 @@
         </dependency>
 
         <!--Spring boot end-->
-
-        <!--Mysql依赖包-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-            <scope>runtime</scope>
-        </dependency>
 
         <!--    java工具包lang3    -->
         <dependency>
@@ -160,6 +157,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!--Mysql依赖包-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
 

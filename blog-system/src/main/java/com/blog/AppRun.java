@@ -12,7 +12,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Date: 2020/4/11 9:40
  **/
 @MapperScan("com.blog.module.business.mapper")
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication //(exclude = {DataSourceAutoConfiguration.class})
 public class AppRun {
 
     public static void main ( String[] args ) {
