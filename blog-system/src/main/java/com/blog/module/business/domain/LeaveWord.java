@@ -1,5 +1,6 @@
 package com.blog.module.business.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,7 +34,8 @@ public class LeaveWord implements Serializable {
     private String leaveContent;
 
     /** 创建时间 */
-    @Column(name="creat_date")
+    @Column(name="create_date")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Timestamp createDate;
 
     /** 博主回复内容 */
@@ -42,6 +44,7 @@ public class LeaveWord implements Serializable {
 
     /** 修改时间 */
     @Column(name="update_date")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Timestamp updateDate;
 
 

@@ -1,5 +1,6 @@
 package com.blog.module.business.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -49,11 +50,13 @@ public class Observe implements Serializable {
     private Boolean delete;
 
     /** 创建时间（评论时间） */
-    @Column(name="creat_date")
+    @Column(name="create_date")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Timestamp createDate;
 
     /** 修改删除 */
     @Column(name="update_date")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Timestamp updateDate;
 
 }
