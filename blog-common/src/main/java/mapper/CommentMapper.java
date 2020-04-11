@@ -14,4 +14,5 @@ import tk.mybatis.mapper.common.Mapper;
  **/
 @RegisterMapper
 public interface CommentMapper<T> extends Mapper<T>, IdListMapper<T, Long>, InsertListMapper<T> {
+
 }
