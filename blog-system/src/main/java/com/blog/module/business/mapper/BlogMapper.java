@@ -1,7 +1,7 @@
 package com.blog.module.business.mapper;
 
 import com.blog.module.business.domain.Blog;
-import mapper.CommentMapper;
+import com.blog.mapper.CommentMapper;
 import org.springframework.stereotype.Component;
 
 

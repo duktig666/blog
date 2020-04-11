@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @author RenShiWei
  * Date: 2020/4/11 9:40
  **/
-@MapperScan("com.blog.mapper")
+@MapperScan("com.blog.com.blog.mapper")
 @SpringBootApplication
 public class AppRun {
 

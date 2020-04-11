@@ -1,4 +1,4 @@
-package mapper;
+package com.blog.mapper;
 
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;
