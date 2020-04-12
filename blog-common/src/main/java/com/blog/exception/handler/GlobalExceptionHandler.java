@@ -59,6 +59,7 @@ public class GlobalExceptionHandler {
      * 功能描述：处理所有接口数据验证异常
      * 使用：在接口的参数前使用注解 @Valid 验证参数的合法性
      *
+     *  暂时不确定能否使用（需要测试）
      * @param e 接口数据验证异常 MethodArgumentNotValidException
      * @return 接口数据验证异常
      * @author RenShiWei
