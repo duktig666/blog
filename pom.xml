@@ -65,11 +65,11 @@
             <scope>test</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>1.3.2</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.mybatis.spring.boot</groupId>-->
+        <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+        <!--            <version>1.3.2</version>-->
+        <!--        </dependency>-->
 
         <!-- 通用mapper -->
         <dependency>
@@ -222,10 +222,18 @@
             <version>${redis.clients.version}</version>
         </dependency>
 
+        <!--    第三方swagger ui    -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>${swagger.bootstrap.ui.version}</version>
+        </dependency>
+
+        <!--    commons-codec 摘要运算、编码解码的包    -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
         </dependency>
 
     </dependencies>

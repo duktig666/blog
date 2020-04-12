@@ -13,7 +13,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Date: 2020/4/11 9:40
  **/
 @MapperScan("com.blog.module.business.mapper")
-@EnableCaching
 @SpringBootApplication
 public class AppRun {
 
