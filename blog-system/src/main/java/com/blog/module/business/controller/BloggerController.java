@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 功能描述：
+ * 功能描述：博主信息增删改查
  *
  * @author RenShiWei
  * Date: 2020/4/11 11:07
@@ -29,32 +29,19 @@ public class BloggerController {
     @Autowired
     private BloggerService bloggerService;
 
-    /**
-     * 功能描述：增加博主信息
-     *
-     * @param blogger
-     * @author jiaoqianjin
-     * Date: 2020/4/13 9:59
-     */
-    @ApiOperation(value = "新增博主信息",notes="新增一位博主信息; author：JQJ")
+
+    @ApiOperation(value = "新增博主信息",notes="新增一位博主信息;\n author：JQJ")
     @ApiImplicitParam(name = "blogger", value = "新增的博主信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveBlogger(@Valid Blogger blogger){
+    public ResponseEntity<Void> saveBlogger(@Validated Blogger blogger){
         this.bloggerService.saveBlogger(blogger);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    /**
-     * 功能描述：根据博主id 查询博主信息
-     *
-     * @param bloggerId
-     * @return 对应博主信息
-     * @author jiaoqianjin
-     * Date: 2020/4/13 10:40
-     */
-    @ApiOperation(value = "根据博主id查询博主信息",notes="查询博主信息; author：JQJ")
+
+    @ApiOperation(value = "根据博主id查询博主信息",notes="查询博主信息;\n author：JQJ")
     @ApiImplicitParam(name = "bloggerId", value = "要查询的博主id", required = true)
-    @GetMapping("queryBlogger/{bloggerId}")
-    public ResponseEntity<Blogger> queryBloggerById(@Valid @PathVariable("bloggerId") Long bloggerId){
+    @GetMapping
+    public ResponseEntity<Blogger> queryBloggerById(@Valid  Long bloggerId){
         Blogger blogger = this.bloggerService.queryBlogger(bloggerId);
         if (blogger == null) {
             return ResponseEntity.notFound().build();
@@ -62,34 +49,20 @@ public class BloggerController {
         return ResponseEntity.ok(blogger);
     }
 
-    /**
-     * 功能描述：根据博主id 修改博主信息
-     *
-     * @param blogger
-     * @author jiaoqianjin
-     * Date: 2020/4/13 10:06
-     */
-    @ApiOperation(value = "修改博主信息",notes="根据传入新的博主信息进行修改; author：JQJ")
+    @ApiOperation(value = "修改博主信息",notes="根据传入新的博主信息进行修改; \n author：JQJ")
     @ApiImplicitParam(name = "blogger", value = "前端修改后的博主信息", required = true)
-    @PutMapping("updateBlogger")
-    public ResponseEntity<Void> updateBlogger(@Valid @RequestBody Blogger blogger) {
+    @PutMapping
+    public ResponseEntity<Void> updateBlogger(@Validated @RequestBody Blogger blogger) {
         this.bloggerService.updateBlogger(blogger);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 功能描述：根据博主id 删除对应主播
-     *
-     * @param bloggerId
-     * @author jiaoqianjin
-     * Date: 2020/4/13 11:30
-     */
-    @ApiOperation(value = "删除博主信息",notes="根据博主id 删除对应博主信息; author：JQJ")
+    @ApiOperation(value = "删除博主信息",notes="根据博主id 删除对应博主信息; \n author：JQJ")
     @ApiImplicitParam(name = "bloggerId", value = "要删除的博主id", required = true)
-    @DeleteMapping("deleteBlogger")
-    public ResponseEntity<Void> deleteBloggerByIdLong (@Valid @RequestParam Long bloggerId){
+    @DeleteMapping
+    public ResponseEntity<Void> deleteBloggerByIdLong (@Valid Long bloggerId){
         this.bloggerService.deleteBlogger(bloggerId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
 
