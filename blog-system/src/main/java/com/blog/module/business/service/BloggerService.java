@@ -44,5 +44,5 @@ public interface BloggerService {
      * @author jiaoqianjin
      * Date: 2020/4/13 10:11
      */
-    Integer deleteBlogger(Long bloggerId);
+    void deleteBlogger(Long bloggerId);
 }

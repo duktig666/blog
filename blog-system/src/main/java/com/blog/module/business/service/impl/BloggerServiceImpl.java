@@ -1,5 +1,6 @@
 package com.blog.module.business.service.impl;
 
+import com.blog.exception.BaseException;
 import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.mapper.BloggerMapper;
 import com.blog.module.business.service.BloggerService;
@@ -28,7 +29,10 @@ public class BloggerServiceImpl implements BloggerService {
     @Override
     @Transactional
     public void saveBlogger(Blogger blogger) {
-        this.bloggerMapper.insertSelective(blogger);
+        int res = this.bloggerMapper.insertSelective(blogger);
+        if (res == 0) {
+            throw new BaseException("新增博主信息失败！");
+        }
     }
 
     /**
@@ -41,7 +45,11 @@ public class BloggerServiceImpl implements BloggerService {
      */
     @Override
     public Blogger queryBlogger(Long bloggerId) {
-        return this.bloggerMapper.selectByPrimaryKey(bloggerId);
+        Blogger blogger = this.bloggerMapper.selectByPrimaryKey(bloggerId);
+        if (blogger == null) {
+            throw new BaseException("暂无此博主信息！");
+        }
+        return blogger;
     }
 
     /**
@@ -54,7 +62,10 @@ public class BloggerServiceImpl implements BloggerService {
      */
     @Override
     public void updateBlogger(Blogger blogger) {
-        this.bloggerMapper.updateByPrimaryKey(blogger);
+        int res = this.bloggerMapper.updateByPrimaryKey(blogger);
+        if (res == 0) {
+            throw new BaseException("修改博主信息失败！");
+        }
     }
 
     /**
@@ -66,8 +77,11 @@ public class BloggerServiceImpl implements BloggerService {
      * Date: 2020/4/13 10:11
      */
     @Override
-    public Integer deleteBlogger(Long bloggerId) {
-        return this.bloggerMapper.deleteByPrimaryKey(bloggerId);
+    public void deleteBlogger(Long bloggerId) {
+        int res = this.bloggerMapper.deleteByPrimaryKey(bloggerId);
+        if (res == 0) {
+            throw new BaseException("删除博主信息失败！");
+        }
     }
 
 

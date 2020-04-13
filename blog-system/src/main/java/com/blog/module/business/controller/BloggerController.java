@@ -43,9 +43,6 @@ public class BloggerController {
     @GetMapping
     public ResponseEntity<Blogger> queryBloggerById(@Valid  Long bloggerId){
         Blogger blogger = this.bloggerService.queryBlogger(bloggerId);
-        if (blogger == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(blogger);
     }
 
