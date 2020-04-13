@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 功能描述：
+ * 功能描述：博客相关的接口
  *
  * @author RenShiWei
  * Date: 2020/4/11 11:08
