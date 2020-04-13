@@ -1,6 +1,7 @@
 package com.blog.exception.handler;
 
-import com.blog.exception.BadRequestException;
+import com.blog.exception.BaseException;
+import com.blog.exception.dto.ApiErrorDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class GlobalExceptionHandler {
 
     /**
      * 功能描述：统一返回异常对象的信息
-     * @param apiError 自定义封装的异常对象
+     * @param apiErrorDto 自定义封装的异常对象
      * @return 异常对象的信息
      * @author RenShiWei
      * Date: 2020/4/11 20:01
      */
-    private ResponseEntity<ApiError> buildResponseEntity(ApiError apiError) {
-        return new ResponseEntity<>(apiError, HttpStatus.valueOf(apiError.getStatus()));
+    private ResponseEntity<ApiErrorDto> buildResponseEntity( ApiErrorDto apiErrorDto ) {
+        return new ResponseEntity<>(apiErrorDto, HttpStatus.valueOf(apiErrorDto.getStatus()));
     }
 
     /**
@@ -39,20 +40,20 @@ public class GlobalExceptionHandler {
      * Date: 2020/4/11 19:54
      */
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<ApiError> handleException( Throwable e){
+    public ResponseEntity<ApiErrorDto> handleException( Throwable e){
         // 异常信息
         log.error("Throwable",e);
-        return buildResponseEntity(ApiError.error(e.getMessage()));
+        return buildResponseEntity(ApiErrorDto.error(e.getMessage()));
     }
 
     /**
      * 处理自定义异常
      */
-    @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<ApiError> badRequestException(BadRequestException e) {
+    @ExceptionHandler(value = BaseException.class)
+    public ResponseEntity<ApiErrorDto> badRequestException( BaseException e) {
         // 打印堆栈信息
         log.error("BadRequestException(自定义请求异常)",e);
-        return buildResponseEntity(ApiError.error(e.getStatus(),e.getMessage()));
+        return buildResponseEntity(ApiErrorDto.error(e.getStatus(),e.getMessage()));
     }
 
     /**
@@ -66,11 +67,11 @@ public class GlobalExceptionHandler {
      * Date: 2020/4/11 20:19
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<ApiErrorDto> handleMethodArgumentNotValidException( MethodArgumentNotValidException e){
         // 打印堆栈信息
         log.error("MethodArgumentNotValidException(接口数据验证异常)",e);
         String message = Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage();
-        return buildResponseEntity(ApiError.error(message));
+        return buildResponseEntity(ApiErrorDto.error(message));
     }
 
 }

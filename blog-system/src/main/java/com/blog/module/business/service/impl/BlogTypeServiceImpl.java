@@ -1,7 +1,7 @@
 package com.blog.module.business.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.blog.exception.BadRequestException;
+import com.blog.exception.BaseException;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.mapper.BlogTypeMapper;
 import com.blog.module.business.service.BlogTypeService;
@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
     public void saveBlogType ( BlogType blogType ) {
         int count = blogTypeMapper.insertSelective(blogType);
         if (count == 0) {
-            throw new BadRequestException("新增博客类型失败！");
+            throw new BaseException("新增博客类型失败！");
         }
     }
 
@@ -55,7 +54,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
     public void deleteBlogType ( Long blogTypeId ) {
         int count = blogTypeMapper.deleteByPrimaryKey(blogTypeId);
         if (count == 0) {
-            throw new BadRequestException("删除博客类型失败！");
+            throw new BaseException("删除博客类型失败！");
         }
     }
 
@@ -69,11 +68,11 @@ public class BlogTypeServiceImpl implements BlogTypeService {
     @Override
     public void deleteBlogTypes ( List<Long> blogTypeIds ) {
         if (CollectionUtil.isEmpty(blogTypeIds)) {
-            throw new BadRequestException(HttpStatus.NOT_FOUND, "传入所需要删除的ID集合不能为空");
+            throw new BaseException(HttpStatus.NOT_FOUND, "传入所需要删除的ID集合不能为空");
         }
         int count = blogTypeMapper.deleteByIdList(blogTypeIds);
         if (count == 0) {
-            throw new BadRequestException("删除博客类型失败！");
+            throw new BaseException("删除博客类型失败！");
         }
     }
 
@@ -88,7 +87,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
     public void updateBlogType ( BlogType blogType ) {
         int count = blogTypeMapper.updateByPrimaryKeySelective(blogType);
         if (count == 0) {
-            throw new BadRequestException("修改博客类型失败！");
+            throw new BaseException("修改博客类型失败！");
         }
     }
 
@@ -104,7 +103,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
     public BlogType queryBlogTypeById ( Long blogTypeId ) {
         BlogType blogType = blogTypeMapper.selectByPrimaryKey(blogTypeId);
         if (blogType == null) {
-            throw new BadRequestException("暂无此博客类型！");
+            throw new BaseException("暂无此博客类型！");
         }
         return blogType;
     }
@@ -125,7 +124,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
         //查询结果转换为Page对象
         Page<BlogType> blogTypePage = (Page<BlogType>) blogTypeMapper.selectAll();
         if (CollectionUtils.isEmpty(blogTypePage)) {
-            throw new BadRequestException("暂无博客类型！");
+            throw new BaseException("暂无博客类型！");
         }
         return new PageResultDto<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
     }

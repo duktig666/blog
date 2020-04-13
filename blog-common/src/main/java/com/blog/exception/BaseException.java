@@ -12,15 +12,15 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
  * Date: 2020/4/11 19:52
  **/
 @Getter
-public class BadRequestException extends RuntimeException{
+public class BaseException extends RuntimeException{
 
     private Integer status = BAD_REQUEST.value();
 
-    public BadRequestException ( String msg){
+    public BaseException ( String msg){
         super(msg);
     }
 
-    public BadRequestException ( HttpStatus status, String msg){
+    public BaseException ( HttpStatus status, String msg){
         super(msg);
         this.status = status.value();
     }

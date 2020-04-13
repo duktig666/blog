@@ -1,4 +1,4 @@
-package com.blog.exception.handler;
+package com.blog.exception.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * Date: 2020/4/11 19:47
  **/
 @Data
-public class ApiError {
+public class ApiErrorDto {
     /** 异常状态码 */
     private Integer status = 400;
 
@@ -23,7 +23,7 @@ public class ApiError {
     /** 异常信息 */
     private String message;
 
-    private ApiError() {
+    private ApiErrorDto () {
         timestamp = LocalDateTime.now();
     }
 
@@ -34,10 +34,10 @@ public class ApiError {
      * @author RenShiWei
      * Date: 2020/4/11 19:49
      */
-    public static ApiError error(String message){
-        ApiError apiError = new ApiError();
-        apiError.setMessage(message);
-        return apiError;
+    public static ApiErrorDto error( String message){
+        ApiErrorDto apiErrorDto = new ApiErrorDto();
+        apiErrorDto.setMessage(message);
+        return apiErrorDto;
     }
 
     /**
@@ -48,11 +48,11 @@ public class ApiError {
      * @author RenShiWei
      * Date: 2020/4/11 19:49
      */
-    public static ApiError error(Integer status, String message){
-        ApiError apiError = new ApiError();
-        apiError.setStatus(status);
-        apiError.setMessage(message);
-        return apiError;
+    public static ApiErrorDto error( Integer status, String message){
+        ApiErrorDto apiErrorDto = new ApiErrorDto();
+        apiErrorDto.setStatus(status);
+        apiErrorDto.setMessage(message);
+        return apiErrorDto;
     }
 
 }
