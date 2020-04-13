@@ -1,6 +1,9 @@
 package com.blog.module.upload.controller;
 
 import com.blog.module.upload.service.UploadService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,20 +24,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/upload")
+@Api(tags = "上传图片模块")
 public class UploadController {
 
     @Autowired
     private UploadService uploadService;
 
     /**
-     * 图片上传
-     * - 请求方式：上传肯定是POST
-     * - 请求路径：/upload/image
-     * - 请求参数：文件，参数名是file，SpringMVC会封装为一个接口：MultipartFile
-     * - 返回结果：上传成功后得到的文件的url路径，也就是返回String
+     * 功能描述：图片上传
+     *  请求参数：文件，参数名是file，SpringMVC会封装为一个接口：MultipartFile
+     *   返回结果：上传成功后得到的文件的url路径，也就是返回String
      * @param file
-     * @return
+     * @return 图片的url地址
+     * @author jiaoqianjin
+     * Date: 2020/4/13 14:25
      */
+    @ApiOperation(value = "上传图片",notes="根据上传图片并返回url; author：JQJ")
+    @ApiImplicitParam(name = "file", value = "选择上传的图片", required = true)
     @PostMapping("/image")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file){
         String url = this.uploadService.upload(file);
