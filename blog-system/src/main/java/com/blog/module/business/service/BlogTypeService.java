@@ -58,7 +58,7 @@ public interface BlogTypeService {
      * @author RenShiWei
      * Date: 2020/4/13 9:16
      */
-    BlogType queryBlogById ( Long blogTypeId );
+    BlogType queryBlogTypeById ( Long blogTypeId );
 
     /**
      * 功能描述：查询所有的博客类型（可以分页和排序）
@@ -68,6 +68,6 @@ public interface BlogTypeService {
      * @author RenShiWei
      * Date: 2020/4/13 9:16
      */
-    PageResultDto<BlogType> queryBlogAll ( PageVo pageVo );
+    PageResultDto<BlogType> queryBlogTypeAll ( PageVo pageVo );
 
 }

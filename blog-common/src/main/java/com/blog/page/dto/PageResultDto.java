@@ -1,6 +1,8 @@
 package com.blog.page.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  **/
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageResultDto<T> {
         /** 总条数 */
         private Long total;
@@ -20,17 +24,8 @@ public class PageResultDto<T> {
         /** 当前页数据 */
         private List<T> items;
 
-        public PageResultDto () {
-        }
-
         public PageResultDto ( Long total, List<T> items) {
             this.total = total;
-            this.items = items;
-        }
-
-        public PageResultDto ( Long total, Integer totalPage, List<T> items) {
-            this.total = total;
-            this.totalPage = totalPage;
             this.items = items;
         }
 
