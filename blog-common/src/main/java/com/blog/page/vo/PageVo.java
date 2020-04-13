@@ -15,7 +15,7 @@ public class PageVo {
     private Integer currentPage;
 
     /** 当前页显示数据的条数 */
-    private Integer count;
+    private Integer rows;
 
     /** 排序方式 */
     private String sort;

@@ -1,6 +1,7 @@
 package com.blog.module.business.service.impl;
 
 import com.blog.module.business.mapper.BlogLabelMapper;
+import com.blog.module.business.service.BlogLabelService;
 import com.blog.module.business.service.BlogTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Date: 2020/4/11 11:13
  **/
 @Service
-public class BlogLabelServiceImpl implements BlogTypeService {
+public class BlogLabelServiceImpl implements BlogLabelService {
     @Autowired
     private BlogLabelMapper blogLabelMapper;
 }

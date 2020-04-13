@@ -16,7 +16,7 @@ public class PageResultDto<T> {
         /** 总条数 */
         private Long total;
         /** 总页数 */
-        private Long totalPage;
+        private Integer totalPage;
         /** 当前页数据 */
         private List<T> items;
 
@@ -28,7 +28,7 @@ public class PageResultDto<T> {
             this.items = items;
         }
 
-        public PageResultDto ( Long total, Long totalPage, List<T> items) {
+        public PageResultDto ( Long total, Integer totalPage, List<T> items) {
             this.total = total;
             this.totalPage = totalPage;
             this.items = items;

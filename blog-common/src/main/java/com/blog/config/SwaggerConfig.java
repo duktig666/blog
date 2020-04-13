@@ -25,7 +25,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.blog.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.blog.module.business.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -39,7 +39,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("个人博客系统接口文档")
-                .description("个人博客系统接口文档")
+                .description("个人博客系统接口文档（author：RSW & JQJ）")
                 .version("1.0")
                 .build();
     }
