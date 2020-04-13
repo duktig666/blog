@@ -15,4 +15,6 @@ import org.springframework.stereotype.Service;
 public class BlogTypeServiceImpl implements BlogService {
     @Autowired
     private BlogTypeMapper blogTypeMapper;
+
+
 }

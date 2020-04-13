@@ -1,4 +1,4 @@
-package com.blog.pojo;
+package com.blog.page.dto;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import java.util.List;
  **/
 
 @Data
-public class PageResult<T> {
+public class PageResultDto<T> {
         /** 总条数 */
         private Long total;
         /** 总页数 */
@@ -20,15 +20,15 @@ public class PageResult<T> {
         /** 当前页数据 */
         private List<T> items;
 
-        public PageResult() {
+        public PageResultDto () {
         }
 
-        public PageResult(Long total, List<T> items) {
+        public PageResultDto ( Long total, List<T> items) {
             this.total = total;
             this.items = items;
         }
 
-        public PageResult(Long total, Long totalPage, List<T> items) {
+        public PageResultDto ( Long total, Long totalPage, List<T> items) {
             this.total = total;
             this.totalPage = totalPage;
             this.items = items;
