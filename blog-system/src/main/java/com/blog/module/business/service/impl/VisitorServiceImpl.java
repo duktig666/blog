@@ -5,8 +5,8 @@ import com.blog.exception.BaseException;
 import com.blog.module.business.domain.Visitor;
 import com.blog.module.business.mapper.VisitorMapper;
 import com.blog.module.business.service.VisitorService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,7 +116,7 @@ public class VisitorServiceImpl implements VisitorService {
      * Date: 2020/4/13 20:46
      */
     @Override
-    public PageResultDto<Visitor> queryVisitorAll(PageVo pageVo) {
+    public PageResultDTO<Visitor> queryVisitorAll( PageVO pageVo) {
         // 分页 排序 查询条件
         PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
         // 查询所有的访客信息
@@ -127,6 +127,6 @@ public class VisitorServiceImpl implements VisitorService {
         //分页处理
         PageInfo<Visitor> pageInfo = new PageInfo<>(visitors);
         //返回封装的分页结果集
-        return new  PageResultDto<>(pageInfo.getTotal(),pageInfo.getPageSize(),pageInfo.getList());
+        return new PageResultDTO<>(pageInfo.getTotal(),pageInfo.getPageSize(),pageInfo.getList());
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * Date: 2020/4/11 19:47
  **/
 @Data
-public class ApiErrorDto {
+public class ApiErrorDTO {
     /** 异常状态码 */
     private Integer status = 400;
 
@@ -23,7 +23,7 @@ public class ApiErrorDto {
     /** 异常信息 */
     private String message;
 
-    private ApiErrorDto () {
+    private ApiErrorDTO () {
         timestamp = LocalDateTime.now();
     }
 
@@ -34,8 +34,8 @@ public class ApiErrorDto {
      * @author RenShiWei
      * Date: 2020/4/11 19:49
      */
-    public static ApiErrorDto error( String message){
-        ApiErrorDto apiErrorDto = new ApiErrorDto();
+    public static ApiErrorDTO error( String message){
+        ApiErrorDTO apiErrorDto = new ApiErrorDTO();
         apiErrorDto.setMessage(message);
         return apiErrorDto;
     }
@@ -48,8 +48,8 @@ public class ApiErrorDto {
      * @author RenShiWei
      * Date: 2020/4/11 19:49
      */
-    public static ApiErrorDto error( Integer status, String message){
-        ApiErrorDto apiErrorDto = new ApiErrorDto();
+    public static ApiErrorDTO error( Integer status, String message){
+        ApiErrorDTO apiErrorDto = new ApiErrorDTO();
         apiErrorDto.setStatus(status);
         apiErrorDto.setMessage(message);
         return apiErrorDto;

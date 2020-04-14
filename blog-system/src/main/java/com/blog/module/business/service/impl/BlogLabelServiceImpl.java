@@ -1,16 +1,16 @@
 package com.blog.module.business.service.impl;
 
+import com.blog.exception.BaseException;
 import com.blog.module.business.domain.BlogLabel;
-import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.mapper.BlogLabelMapper;
 import com.blog.module.business.service.BlogLabelService;
-import com.blog.module.business.service.BlogTypeService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -35,7 +35,10 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      */
     @Override
     public void saveBlogLabel ( BlogLabel blogLabel ) {
-        blogLabelMapper.insertSelective(blogLabel);
+        int count = blogLabelMapper.insertSelective(blogLabel);
+        if (count == 0) {
+            throw new BaseException("新增博客标签失败！");
+        }
     }
 
     /**
@@ -47,7 +50,10 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      */
     @Override
     public void deleteBlogLabel ( Long blogLabelId ) {
-        blogLabelMapper.deleteByPrimaryKey(blogLabelId);
+        int count = blogLabelMapper.deleteByPrimaryKey(blogLabelId);
+        if (count == 0) {
+            throw new BaseException("删除博客标签失败！");
+        }
     }
 
     /**
@@ -59,7 +65,10 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      */
     @Override
     public void deleteBlogLabels ( List<Long> blogLabelIds ) {
-        blogLabelMapper.deleteByIdList(blogLabelIds);
+        int count = blogLabelMapper.deleteByIdList(blogLabelIds);
+        if (count == 0) {
+            throw new BaseException("删除博客标签失败！");
+        }
     }
 
     /**
@@ -71,7 +80,10 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      */
     @Override
     public void updateBlogLabel ( BlogLabel blogLabel ) {
-        blogLabelMapper.updateByPrimaryKeySelective(blogLabel);
+        int count = blogLabelMapper.updateByPrimaryKeySelective(blogLabel);
+        if (count == 0) {
+            throw new BaseException("修改博客标签失败！");
+        }
     }
 
     /**
@@ -84,7 +96,11 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      */
     @Override
     public BlogLabel queryBlogLabelById ( Long blogLabelId ) {
-        return blogLabelMapper.selectByPrimaryKey(blogLabelId);
+        BlogLabel blogLabel=blogLabelMapper.selectByPrimaryKey(blogLabelId);
+        if (blogLabel==null){
+            throw new BaseException("暂无此博客标签！");
+        }
+        return blogLabel;
     }
 
     /**
@@ -96,12 +112,15 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      * Date: 2020/4/13 9:16
      */
     @Override
-    public PageResultDto<BlogLabel> queryBlogLabelAll ( PageVo pageVo ) {
+    public PageResultDTO<BlogLabel> queryBlogLabelAll ( PageVO pageVo ) {
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
         }
         //查询结果转换为Page对象
         Page<BlogLabel> blogTypePage = (Page<BlogLabel>) blogLabelMapper.selectAll();
-        return new PageResultDto<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
+        if (CollectionUtils.isEmpty(blogTypePage)) {
+            throw new BaseException("暂无博客标签！");
+        }
+        return new PageResultDTO<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
     }
 }

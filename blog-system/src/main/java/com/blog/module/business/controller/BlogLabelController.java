@@ -1,10 +1,9 @@
 package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.BlogLabel;
-import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.service.BlogLabelService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -41,8 +40,8 @@ public class BlogLabelController {
 
     @ApiOperation(value = "删除单个博客标签", notes = "根据博客标签id删除;\nauthor：RSW")
     @ApiImplicitParam(name = "blogLabelId", value = "博客标签id", required = true)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteBlogType ( @Valid Long blogLabelId ) {
+    @DeleteMapping("/{blogLabelId}")
+    public ResponseEntity<Void> deleteBlogType ( @Valid @PathVariable Long blogLabelId) {
         blogLabelService.deleteBlogLabel(blogLabelId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -65,15 +64,15 @@ public class BlogLabelController {
 
     @ApiOperation(value = "查询一条博客标签信息", notes = "根据博客标签id查询;\nauthor：RSW")
     @ApiImplicitParam(name = "blogLabelId", value = "博客标签id", required = true)
-    @GetMapping
-    public ResponseEntity<BlogLabel> queryBlogById ( @Valid Long blogLabelId ) {
+    @GetMapping("/{blogLabelId}")
+    public ResponseEntity<BlogLabel> queryBlogById ( @Valid @PathVariable Long blogLabelId ) {
         return ResponseEntity.ok(blogLabelService.queryBlogLabelById(blogLabelId));
     }
 
     @ApiOperation(value = "查询所有的博客标签（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
     @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDto<BlogLabel>> queryBlogAll ( PageVo pageVo ) {
+    public ResponseEntity<PageResultDTO<BlogLabel>> queryBlogAll ( PageVO pageVo ) {
         return ResponseEntity.ok(blogLabelService.queryBlogLabelAll(pageVo));
     }
 

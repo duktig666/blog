@@ -5,8 +5,8 @@ import com.blog.exception.BaseException;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.mapper.BlogTypeMapper;
 import com.blog.module.business.service.BlogTypeService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +117,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
      * Date: 2020/4/13 9:16
      */
     @Override
-    public PageResultDto<BlogType> queryBlogTypeAll ( PageVo pageVo ) {
+    public PageResultDTO<BlogType> queryBlogTypeAll ( PageVO pageVo ) {
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
         }
@@ -126,6 +126,6 @@ public class BlogTypeServiceImpl implements BlogTypeService {
         if (CollectionUtils.isEmpty(blogTypePage)) {
             throw new BaseException("暂无博客类型！");
         }
-        return new PageResultDto<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
+        return new PageResultDTO<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
     }
 }

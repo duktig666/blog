@@ -9,7 +9,7 @@ import lombok.Data;
  * Date: 2020/4/13 10:56
  **/
 @Data
-public class PageVo {
+public class PageVO {
 
     /** 当前页 */
     private Integer currentPage;

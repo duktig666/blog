@@ -1,11 +1,9 @@
 package com.blog.module.business.controller;
 
-import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.domain.Visitor;
-import com.blog.module.business.service.BlogTypeService;
 import com.blog.module.business.service.VisitorService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -73,8 +71,8 @@ public class VisitorController {
     @ApiOperation(value = "查询所有的游客信息",notes="根据分页排序条件查询游客信息; \n author：JQJ")
     @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDto<Visitor>> queryVisitorAll (PageVo pageVo ){
-        PageResultDto<Visitor> visitors = (PageResultDto<Visitor>) this.visitorService.queryVisitorAll(pageVo);
+    public ResponseEntity<PageResultDTO<Visitor>> queryVisitorAll ( PageVO pageVo ){
+        PageResultDTO<Visitor> visitors = (PageResultDTO<Visitor>) this.visitorService.queryVisitorAll(pageVo);
         return ResponseEntity.ok(visitors);
     }
 

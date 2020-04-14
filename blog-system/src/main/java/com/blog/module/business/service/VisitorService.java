@@ -1,8 +1,8 @@
 package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Visitor;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 
 import java.util.List;
 
@@ -67,5 +67,5 @@ public interface VisitorService {
      * @author jiaoqianjin
      * Date: 2020/4/13 20:46
      */
-    PageResultDto<Visitor> queryVisitorAll (PageVo pageVo);
+    PageResultDTO<Visitor> queryVisitorAll ( PageVO pageVo);
 }
