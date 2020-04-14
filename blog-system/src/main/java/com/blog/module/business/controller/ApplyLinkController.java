@@ -1,13 +1,13 @@
 package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.ApplyLink;
-import com.blog.module.business.domain.ApplyLink;
+import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.service.ApplyLinkService;
-import com.blog.page.dto.PageResultDto;
-import com.blog.page.vo.PageVo;
+import com.blog.page.dto.PageResultDTO;
+import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class ApplyLinkController {
     private ApplyLinkService applyLinkService;
 
     @ApiOperation(value = "新增友情链接信息",notes="新增一条友情链接信息; \n author：JQJ")
-    @ApiImplicitParam(name = "applyLink", value = "新增的友情链接信息", required = true)
+    @ApiParam(name = "applyLink", value = "新增的友情链接信息", required = true)
     @PostMapping
     public ResponseEntity<Void> saveApplyLink (@Validated ApplyLink applyLink) {
         this.applyLinkService.saveApplyLink(applyLink);
@@ -55,38 +55,42 @@ public class ApplyLinkController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @ApiOperation(value = "修改友情链接信息",notes="根据前台传入的信息进行修改对应友情链接信息; \n author：JQJ")
-    @ApiImplicitParam(name = "applyLink", value = "修改的友情链接信息", required = true)
+    @ApiParam(name = "applyLink", value = "修改的友情链接信息", required = true)
     @PutMapping
-    public ResponseEntity<Void> updateApplyLink (@Validated ApplyLink applyLink ){
+    public ResponseEntity<String> updateApplyLink (@Validated(ApplyLink.UpdateGroup.class) ApplyLink applyLink ){
         this.applyLinkService.updateApplyLink(applyLink);
-        return ResponseEntity.status(HttpStatus.OK).build();
+
+        // 如果修改状态成功，返回传入的状态信息
+        int state = applyLink.getState();
+        if(state == 1){
+            return ResponseEntity.ok("同意申请");
+        }
+        return ResponseEntity.ok("拒绝申请");
     }
 
-    @ApiOperation(value = "查询一位友情链接信息",notes="根据友情链接id查询对应友情链接信息; \n author：JQJ")
+    @ApiOperation(value = "查询一条友情链接信息",notes="根据友情链接id查询对应友情链接信息; \n author：JQJ")
     @ApiImplicitParam(name = "applyLinkId", value = "友情链接id", required = true)
     @GetMapping("{applyLinkId}")
     public ResponseEntity<ApplyLink> queryApplyLinkById (@Valid @PathVariable("applyLinkId") Long applyLinkId ){
-        ApplyLink ApplyLink = this.applyLinkService.queryApplyLinkById(applyLinkId);
-        return ResponseEntity.ok(ApplyLink);
+        ApplyLink applyLink = this.applyLinkService.queryApplyLinkById(applyLinkId);
+        return ResponseEntity.ok(applyLink);
     }
 
     @ApiOperation(value = "查询所有的友情链接信息",notes="根据分页排序条件查询友情链接信息; \n author：JQJ")
     @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDto<ApplyLink>> queryApplyLinkAll (PageVo pageVo ){
-        PageResultDto<ApplyLink> ApplyLinks = (PageResultDto<ApplyLink>) this.applyLinkService.queryApplyLinkAll(pageVo);
-        return ResponseEntity.ok(ApplyLinks);
+    public ResponseEntity<PageResultDTO<ApplyLink>> queryApplyLinkAll (PageVO pageVO ){
+        PageResultDTO<ApplyLink> applyLinks = (PageResultDTO<ApplyLink>) this.applyLinkService.queryApplyLinkAll(pageVO);
+        return ResponseEntity.ok(applyLinks);
     }
 
     @ApiOperation(value = "查询所有符合状态的友情链接信息",notes="根据分页排序，和状态条件查询友情链接信息; \n author：JQJ")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "state", value = "友情链接状态"),
-            @ApiImplicitParam(name = "pageVo", value = "分页信息")
-    })
-    @GetMapping("/State/{state}")
-    public ResponseEntity<PageResultDto<ApplyLink>> queryApplyLinkAll( @PathVariable("state") Integer state, PageVo pageVo){
-        PageResultDto<ApplyLink> ApplyLinks = (PageResultDto<ApplyLink>) this.applyLinkService.queryApplyLinksByState(state,pageVo);
-        return ResponseEntity.ok(ApplyLinks);
+    @GetMapping("/state/{state}")
+    public ResponseEntity<PageResultDTO<ApplyLink>> queryApplyLinksByState(
+            @ApiParam(name = "state", value = "友情链接状态") @PathVariable("state") Integer state,
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVO){
+        PageResultDTO<ApplyLink> applyLinks = (PageResultDTO<ApplyLink>) this.applyLinkService.queryApplyLinksByState(state,pageVO);
+        return ResponseEntity.ok(applyLinks);
     }
 
 }

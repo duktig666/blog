@@ -29,7 +29,7 @@ public class Observe implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "评论id")
-    @NotNull(message = "评论id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改评论信息，id不可以空")
     private Long id;
 
     /** 所属博客id */
@@ -78,4 +78,6 @@ public class Observe implements Serializable {
     @ApiModelProperty(value = "修改删除")
     private Timestamp updateDate;
 
+    public interface UpdateGroup {
+    }
 }

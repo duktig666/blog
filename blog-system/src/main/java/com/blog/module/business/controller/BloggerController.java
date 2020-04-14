@@ -4,6 +4,7 @@ import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.service.BlogService;
 import com.blog.module.business.service.BloggerService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class BloggerController {
 
 
     @ApiOperation(value = "新增博主信息",notes="新增一位博主信息;\n author：JQJ")
-    @ApiImplicitParam(name = "blogger", value = "新增的博主信息", required = true)
+    @ApiParam(name = "blogger", value = "新增的博主信息", required = true)
     @PostMapping
     public ResponseEntity<Void> saveBlogger(@Validated Blogger blogger){
         this.bloggerService.saveBlogger(blogger);
@@ -47,9 +48,9 @@ public class BloggerController {
     }
 
     @ApiOperation(value = "修改博主信息",notes="根据传入新的博主信息进行修改; \n author：JQJ")
-    @ApiImplicitParam(name = "blogger", value = "前端修改后的博主信息", required = true)
+    @ApiParam(name = "blogger", value = "前端修改后的博主信息", required = true)
     @PutMapping
-    public ResponseEntity<Void> updateBlogger(@Validated @RequestBody Blogger blogger) {
+    public ResponseEntity<Void> updateBlogger(@Validated(Blogger.UpdateGroup.class) Blogger blogger) {
         this.bloggerService.updateBlogger(blogger);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

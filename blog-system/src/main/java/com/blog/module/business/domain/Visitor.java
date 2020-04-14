@@ -30,7 +30,7 @@ public class Visitor implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "游客id")
-    @NotNull(message = "游客id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改游客信息，id不可以空")
     private Long id;
 
     /** 游客昵称 */
@@ -67,5 +67,6 @@ public class Visitor implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Timestamp updateDate;
 
-
+    public interface UpdateGroup {
+    }
 }

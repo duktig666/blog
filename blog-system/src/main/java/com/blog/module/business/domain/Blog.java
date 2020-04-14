@@ -28,7 +28,7 @@ public class Blog  implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "博客id")
-    @NotNull(message = "博客id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改博客信息，id不可以空")
     private Long id;
 
     /** 所属博客类型id */
@@ -86,7 +86,6 @@ public class Blog  implements Serializable {
     @ApiModelProperty(value = "是否删除")
     private Boolean delete;
 
-
-
-
+    public interface UpdateGroup {
+    }
 }

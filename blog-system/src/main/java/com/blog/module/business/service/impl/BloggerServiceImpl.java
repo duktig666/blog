@@ -7,6 +7,7 @@ import com.blog.module.business.service.BloggerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Description：
@@ -33,6 +34,7 @@ public class BloggerServiceImpl implements BloggerService {
         if (res == 0) {
             throw new BaseException("新增博主信息失败！");
         }
+        System.out.println(blogger.getId());
     }
 
     /**

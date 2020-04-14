@@ -29,7 +29,7 @@ public class BlogType implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "博客类型id")
-    @NotNull(message = "博客类型id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改博客类型信息，id不可以空")
     private Long id;
 
     /** 博客类型 */
@@ -50,4 +50,6 @@ public class BlogType implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Timestamp updateDate;
 
+    public interface UpdateGroup {
+    }
 }

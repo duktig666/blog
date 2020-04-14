@@ -1,6 +1,8 @@
 package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.BlogLabel;
+import com.blog.module.business.domain.BlogType;
+import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.service.BlogLabelService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
@@ -57,7 +59,7 @@ public class BlogLabelController {
     @ApiOperation(value = "修改博客标签信息", notes = "根据前台传入的信息进行修改;\nauthor：RSW")
     @ApiImplicitParam(name = "blogLabel", value = "修改的博客标签信息", required = true)
     @PutMapping
-    public ResponseEntity<Void> updateBlogType ( @Validated BlogLabel blogLabel ) {
+    public ResponseEntity<Void> updateBlogType (@Validated(BlogType.UpdateGroup.class) BlogLabel blogLabel ) {
         blogLabelService.updateBlogLabel(blogLabel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

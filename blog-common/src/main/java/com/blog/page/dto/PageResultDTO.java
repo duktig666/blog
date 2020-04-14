@@ -7,26 +7,26 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Description： 分页数据封装
+ * Description：
  *
  * @author jiaoqianjin
- * Date: 2020/4/11 19:54
+ * Date: 2020/4/14 11:22
  **/
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageResultDTO<T> {
-        /** 总条数 */
-        private Long total;
-        /** 总页数 */
-        private Integer totalPage;
-        /** 当前页数据 */
-        private List<T> items;
+    /** 总条数 */
+    private Long total;
+    /** 总页数 */
+    private Integer totalPage;
+    /** 当前页数据 */
+    private List<T> items;
 
-        public PageResultDTO ( Long total, List<T> items) {
-            this.total = total;
-            this.items = items;
-        }
+    public PageResultDTO ( Long total, List<T> items) {
+        this.total = total;
+        this.items = items;
+    }
 
 }

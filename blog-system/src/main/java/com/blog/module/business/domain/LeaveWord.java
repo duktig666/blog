@@ -29,7 +29,7 @@ public class LeaveWord implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "留言id")
-    @NotNull(message = "留言id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改留言信息，id不可以空")
     private Long id;
 
     /** 留言者id */
@@ -61,5 +61,6 @@ public class LeaveWord implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Timestamp updateDate;
 
-
+    public interface UpdateGroup {
+    }
 }

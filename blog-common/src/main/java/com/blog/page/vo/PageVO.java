@@ -3,10 +3,10 @@ package com.blog.page.vo;
 import lombok.Data;
 
 /**
- * 功能描述：接受前台传来的分页信息
+ * Description：
  *
- * @author RenShiWei
- * Date: 2020/4/13 10:56
+ * @author jiaoqianjin
+ * Date: 2020/4/14 11:24
  **/
 @Data
 public class PageVO {
@@ -21,4 +21,3 @@ public class PageVO {
     private String sort;
 
 }
-

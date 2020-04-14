@@ -30,7 +30,7 @@ public class ApplyLink implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @ApiModelProperty(value = "申请链接id")
-    @NotNull(message = "id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "修改申请链接信息，id不可以空")
     private Long id;
 
     /** 申请网站标题 */
@@ -75,5 +75,6 @@ public class ApplyLink implements Serializable {
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Timestamp updateDate;
 
-
+    public interface UpdateGroup {
+    }
 }
