@@ -40,8 +40,8 @@ public class BloggerController {
 
     @ApiOperation(value = "根据博主id查询博主信息",notes="查询博主信息;\n author：JQJ")
     @ApiImplicitParam(name = "bloggerId", value = "要查询的博主id", required = true)
-    @GetMapping
-    public ResponseEntity<Blogger> queryBloggerById(@Valid  Long bloggerId){
+    @GetMapping("/{bloggerId}")
+    public ResponseEntity<Blogger> queryBloggerById(@Valid @PathVariable("bloggerId") Long bloggerId){
         Blogger blogger = this.bloggerService.queryBlogger(bloggerId);
         return ResponseEntity.ok(blogger);
     }
@@ -56,8 +56,8 @@ public class BloggerController {
 
     @ApiOperation(value = "删除博主信息",notes="根据博主id 删除对应博主信息; \n author：JQJ")
     @ApiImplicitParam(name = "bloggerId", value = "要删除的博主id", required = true)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteBloggerByIdLong (@Valid Long bloggerId){
+    @DeleteMapping("/{bloggerId}")
+    public ResponseEntity<Void> deleteBloggerByIdLong (@Valid @PathVariable("bloggerId") Long bloggerId){
         this.bloggerService.deleteBlogger(bloggerId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

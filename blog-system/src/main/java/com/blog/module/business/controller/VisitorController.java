@@ -39,16 +39,16 @@ public class VisitorController {
 
     @ApiOperation(value = "删除单个游客信息",notes="根据游客id删除对应游客信息; \n author：JQJ")
     @ApiImplicitParam(name = "visitorId", value = "博客id", required = true)
-    @DeleteMapping
-    public ResponseEntity<Void> deleteVisitor (@Valid Long visitorId ){
+    @DeleteMapping("/{visitorId}")
+    public ResponseEntity<Void> deleteVisitor (@Valid @PathVariable("visitorId") Long visitorId ){
         this.visitorService.deleteVisitor(visitorId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "批量删除游客信息",notes="根据游客id集合批量删除游客信息; \n author：JQJ")
     @ApiImplicitParam(name = "blogTypeIds", value = "游客id集合", required = true)
-    @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteVisitors (@Valid List<Long> visitorIds ){
+    @DeleteMapping("/ids/{visitorIds}")
+    public ResponseEntity<Void> deleteVisitors (@Valid @PathVariable("visitorIds") List<Long> visitorIds ){
         this.visitorService.deleteVisitors(visitorIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -62,8 +62,8 @@ public class VisitorController {
 
     @ApiOperation(value = "查询一位游客信息",notes="根据游客id查询对应游客信息; \n author：JQJ")
     @ApiImplicitParam(name = "blogTypeId", value = "游客id", required = true)
-    @GetMapping
-    public ResponseEntity<Visitor> queryVisitorById (@Valid Long visitorId ){
+    @GetMapping("/{visitorId}")
+    public ResponseEntity<Visitor> queryVisitorById (@Valid @PathVariable("visitorId") Long visitorId ){
         Visitor visitor = this.visitorService.queryVisitor(visitorId);
         return ResponseEntity.ok(visitor);
     }

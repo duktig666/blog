@@ -5,6 +5,8 @@ import com.blog.module.business.service.LeaveWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Description：
  *
@@ -15,4 +17,6 @@ import org.springframework.stereotype.Service;
 public class LeaveWordServiceImpl implements LeaveWordService {
     @Autowired
     private LeaveWordMapper leaveWordMapper;
+
+
 }
