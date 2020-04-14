@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name="apply_link")
-@ApiModel
+@ApiModel("友情链接")
 public class ApplyLink implements Serializable {
 
     /** 申请链接id */

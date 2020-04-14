@@ -25,7 +25,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="blogger")
-@ApiModel
+@ApiModel("博主")
 public class Blogger implements Serializable {
 
     /** 博主id */

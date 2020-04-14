@@ -8,6 +8,7 @@ import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,8 @@ public class BlogTypeController {
     @ApiOperation(value = "新增博客类型", notes = "新增一条博客信息;\nauthor：RSW")
     @ApiImplicitParam(name = "blogType", value = "新增的博客类型信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveBlogType ( @Validated BlogType blogType ) {
+    public ResponseEntity<Void> saveBlogType (@ApiParam(name = "blogType", value = "新增的博客类型信息", required = true)
+                                                  @Validated BlogType blogType ) {
         blogTypeService.saveBlogType(blogType);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -73,7 +75,7 @@ public class BlogTypeController {
     @ApiOperation(value = "查询所有的博客类型（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
     @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<BlogType>> queryBlogAll ( PageVO pageVo ) {
+    public ResponseEntity<PageResultDTO<BlogType>> queryBlogAll (@ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
         return ResponseEntity.ok(blogTypeService.queryBlogTypeAll(pageVo));
     }
 

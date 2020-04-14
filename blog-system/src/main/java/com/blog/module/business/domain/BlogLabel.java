@@ -21,7 +21,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="blog_label")
-@ApiModel
+@ApiModel("博客标签")
 public class BlogLabel implements Serializable {
 
     /** 博客标签id */

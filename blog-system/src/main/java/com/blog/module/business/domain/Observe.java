@@ -21,7 +21,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="observe")
-@ApiModel
+@ApiModel("评论")
 public class Observe implements Serializable {
 
     /** 评论id */

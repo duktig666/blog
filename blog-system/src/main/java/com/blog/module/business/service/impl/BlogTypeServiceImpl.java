@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -36,11 +37,13 @@ public class BlogTypeServiceImpl implements BlogTypeService {
      * Date: 2020/4/13 8:45
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveBlogType ( BlogType blogType ) {
         int count = blogTypeMapper.insertSelective(blogType);
         if (count == 0) {
             throw new BaseException("新增博客类型失败！");
         }
+        System.out.println(blogType.getId());
     }
 
     /**
@@ -51,6 +54,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteBlogType ( Long blogTypeId ) {
         int count = blogTypeMapper.deleteByPrimaryKey(blogTypeId);
         if (count == 0) {
@@ -66,6 +70,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteBlogTypes ( List<Long> blogTypeIds ) {
         if (CollectionUtil.isEmpty(blogTypeIds)) {
             throw new BaseException(HttpStatus.NOT_FOUND, "传入所需要删除的ID集合不能为空");
@@ -84,6 +89,7 @@ public class BlogTypeServiceImpl implements BlogTypeService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateBlogType ( BlogType blogType ) {
         int count = blogTypeMapper.updateByPrimaryKeySelective(blogType);
         if (count == 0) {
@@ -128,4 +134,5 @@ public class BlogTypeServiceImpl implements BlogTypeService {
         }
         return new PageResultDTO<>(blogTypePage.getTotal(), blogTypePage.getPageSize(), blogTypePage);
     }
+
 }

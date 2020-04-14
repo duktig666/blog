@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name="blog")
-@ApiModel
+@ApiModel("博客")
 public class Blog  implements Serializable {
 
     /** 博客id */

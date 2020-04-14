@@ -22,7 +22,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="visitor")
-@ApiModel
+@ApiModel("游客")
 public class Visitor implements Serializable {
 
     /** 游客id */

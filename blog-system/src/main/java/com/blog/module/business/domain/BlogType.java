@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.apache.ibatis.annotations.Update;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,7 +22,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="blog_type")
-@ApiModel
+@ApiModel("博客类型")
 public class BlogType implements Serializable {
 
     /** 博客类型id */

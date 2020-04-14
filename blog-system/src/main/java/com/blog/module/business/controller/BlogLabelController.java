@@ -2,13 +2,13 @@ package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
-import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.service.BlogLabelService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,8 @@ public class BlogLabelController {
     @ApiOperation(value = "新增博客标签", notes = "新增一条博客标签;\nauthor：RSW")
     @ApiImplicitParam(name = "blogLabel", value = "新增的博客标签信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveBlogType ( @Validated BlogLabel blogLabel ) {
+    public ResponseEntity<Void> saveBlogType ( @ApiParam(name = "blogLabel", value = "新增的博客标签信息", required = true) @Validated
+                                                       BlogLabel blogLabel ) {
         blogLabelService.saveBlogLabel(blogLabel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -43,7 +44,7 @@ public class BlogLabelController {
     @ApiOperation(value = "删除单个博客标签", notes = "根据博客标签id删除;\nauthor：RSW")
     @ApiImplicitParam(name = "blogLabelId", value = "博客标签id", required = true)
     @DeleteMapping("/{blogLabelId}")
-    public ResponseEntity<Void> deleteBlogType ( @Valid @PathVariable Long blogLabelId) {
+    public ResponseEntity<Void> deleteBlogType ( @Valid @PathVariable Long blogLabelId ) {
         blogLabelService.deleteBlogLabel(blogLabelId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -74,7 +75,7 @@ public class BlogLabelController {
     @ApiOperation(value = "查询所有的博客标签（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
     @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<BlogLabel>> queryBlogAll ( PageVO pageVo ) {
+    public ResponseEntity<PageResultDTO<BlogLabel>> queryBlogAll ( @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
         return ResponseEntity.ok(blogLabelService.queryBlogLabelAll(pageVo));
     }
 

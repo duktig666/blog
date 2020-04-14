@@ -10,6 +10,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      * Date: 2020/4/13 8:45
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveBlogLabel ( BlogLabel blogLabel ) {
         int count = blogLabelMapper.insertSelective(blogLabel);
         if (count == 0) {
@@ -49,6 +51,7 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteBlogLabel ( Long blogLabelId ) {
         int count = blogLabelMapper.deleteByPrimaryKey(blogLabelId);
         if (count == 0) {
@@ -64,6 +67,7 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteBlogLabels ( List<Long> blogLabelIds ) {
         int count = blogLabelMapper.deleteByIdList(blogLabelIds);
         if (count == 0) {
@@ -79,6 +83,7 @@ public class BlogLabelServiceImpl implements BlogLabelService {
      * Date: 2020/4/13 9:00
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateBlogLabel ( BlogLabel blogLabel ) {
         int count = blogLabelMapper.updateByPrimaryKeySelective(blogLabel);
         if (count == 0) {

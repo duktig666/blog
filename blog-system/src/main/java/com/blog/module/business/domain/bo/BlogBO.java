@@ -3,6 +3,7 @@ package com.blog.module.business.domain.bo;
 import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,9 +15,12 @@ import java.util.List;
  * @author RenShiWei
  * Date: 2020/4/14 11:04
  **/
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class BlogBO extends Blog {
+@AllArgsConstructor
+public class BlogBO{
+
+    /** 博客信息 */
+    private Blog blog;
 
     /** 文章所属的博客类型 */
     private BlogType blogType;

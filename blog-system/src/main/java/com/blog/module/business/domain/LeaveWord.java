@@ -21,7 +21,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="leave_word")
-@ApiModel
+@ApiModel("留言")
 public class LeaveWord implements Serializable {
 
     /** 留言id */
