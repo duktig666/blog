@@ -3,6 +3,7 @@ package com.blog.module.business.service;
 
 import com.blog.module.business.domain.LeaveWord;
 import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.bo.LeaveWordBO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 
@@ -60,7 +61,7 @@ public interface LeaveWordService {
      * @author jiaoqianjin
      * Date: 2020/4/14 8:37
      */
-    LeaveWord queryLeaveWordById (Long leaveWordId);
+//    LeaveWordBO queryLeaveWordById (Long leaveWordId);
     
     /**
      * 功能描述：根据传入的分页排序信息，查询对应留言信息
@@ -70,7 +71,7 @@ public interface LeaveWordService {
      * @author jiaoqianjin
      * Date: 2020/4/14 8:39
      */
-    PageResultDTO<LeaveWord> queryLeaveWordAll (PageVO pageVO);
+    PageResultDTO<LeaveWordBO> queryLeaveWordAll (PageVO pageVO);
     
     /**
      * 功能描述：根据筛选出未回复的留言信息，并分页排序
@@ -81,7 +82,7 @@ public interface LeaveWordService {
      * @author jiaoqianjin
      * Date: 2020/4/14 9:55
      */
-    PageResultDTO queryLeaveWordsByState (String replyContent, PageVO pageVO);
+//    PageResultDTO queryLeaveWordsByState (String replyContent, PageVO pageVO);
         
 
 }

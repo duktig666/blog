@@ -5,6 +5,7 @@ import com.blog.exception.BaseException;
 import com.blog.module.business.domain.ApplyLink;
 import com.blog.module.business.domain.LeaveWord;
 import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.bo.LeaveWordBO;
 import com.blog.module.business.mapper.LeaveWordMapper;
 import com.blog.module.business.mapper.VisitorMapper;
 import com.blog.module.business.service.LeaveWordService;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -116,14 +118,14 @@ public class LeaveWordServiceImpl implements LeaveWordService {
      * @author jiaoqianjin
      * Date: 2020/4/14 8:37
      */
-    @Override
-    public LeaveWord queryLeaveWordById(Long LeaveWordId) {
-        LeaveWord leaveWord = this.leaveWordMapper.selectByPrimaryKey(LeaveWordId);
-        if (leaveWord == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND,"暂无此留言信息！");
-        }
-        return leaveWord;
-    }
+//    @Override
+//    public LeaveWord queryLeaveWordById(Long LeaveWordId) {
+//        LeaveWord leaveWord = this.leaveWordMapper.selectByPrimaryKey(LeaveWordId);
+//        if (leaveWord == null) {
+//            throw new BaseException(HttpStatus.NOT_FOUND,"暂无此留言信息！");
+//        }
+//        return leaveWord;
+//    }
 
     /**
      * 功能描述：根据传入的分页排序信息，查询对应留言信息
@@ -134,18 +136,28 @@ public class LeaveWordServiceImpl implements LeaveWordService {
      * Date: 2020/4/14 8:39
      */
     @Override
-    public PageResultDTO<LeaveWord> queryLeaveWordAll(PageVO pageVO) {
+    public PageResultDTO<LeaveWordBO> queryLeaveWordAll(PageVO pageVO) {
         // 分页 排序 查询条件
         if (pageVO != null) {
             PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getRows(), pageVO.getSort());
         }
+//        LeaveWordBO leaveWordBO = new LeaveWordBO();
+        List<LeaveWordBO> leaveWordBOS = new ArrayList<>();
         // 查询所有的留言信息
         List<LeaveWord> leaveWords = this.leaveWordMapper.selectAll();
-        if (leaveWords == null) {
+        // 根据留言信息中游客id,查找游客信息
+        leaveWords.forEach(leaveWord -> {
+                    Visitor visitor = this.visitorMapper.selectByPrimaryKey(leaveWord.getVisitorId());
+                    LeaveWordBO leaveWordBO = new LeaveWordBO(visitor,leaveWord);
+                    leaveWordBOS.add(leaveWordBO);
+        }
+
+        );
+        if (leaveWordBOS == null) {
             throw new BaseException(HttpStatus.NOT_FOUND,"查询留言信息失败！");
         }
         //分页处理
-        PageInfo<LeaveWord> pageInfo = new PageInfo<>(leaveWords);
+        PageInfo<LeaveWordBO> pageInfo = new PageInfo<>(leaveWordBOS);
         //返回封装的分页结果集
         return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getList());
     }
@@ -159,24 +171,24 @@ public class LeaveWordServiceImpl implements LeaveWordService {
      * @author jiaoqianjin
      * Date: 2020/4/14 9:55
      */
-    @Override
-    public PageResultDTO<LeaveWord> queryLeaveWordsByState(String replyContent, PageVO pageVO) {
-        // 分页 排序 查询条件
-        if (pageVO != null) {
-            PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getRows(), pageVO.getSort());
-        }
-        // 查询所有的友情链接信息
-        Example example = new Example(ApplyLink.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("replyContent", replyContent);
-
-        List<LeaveWord> leaveWords = this.leaveWordMapper.selectByExample(example);
-        if (leaveWords == null) {
-            throw new BaseException(HttpStatus.NOT_FOUND,"查询留言信息失败！");
-        }
-        //分页处理
-        PageInfo<LeaveWord> pageInfo = new PageInfo<>(leaveWords);
-        //返回封装的分页结果集
-        return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getList());
-    }
+//    @Override
+//    public PageResultDTO<LeaveWordBO> queryLeaveWordsByState(String replyContent, PageVO pageVO) {
+//        // 分页 排序 查询条件
+//        if (pageVO != null) {
+//            PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getRows(), pageVO.getSort());
+//        }
+//        // 查询所有的友情链接信息
+//        Example example = new Example(ApplyLink.class);
+//        Example.Criteria criteria = example.createCriteria();
+//        criteria.andEqualTo("replyContent", replyContent);
+//
+//        List<LeaveWord> leaveWords = this.leaveWordMapper.selectByExample(example);
+//        if (leaveWords == null) {
+//            throw new BaseException(HttpStatus.NOT_FOUND,"查询留言信息失败！");
+//        }
+//        //分页处理
+//        PageInfo<LeaveWord> pageInfo = new PageInfo<>(leaveWords);
+//        //返回封装的分页结果集
+//        return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getList());
+//    }
 }

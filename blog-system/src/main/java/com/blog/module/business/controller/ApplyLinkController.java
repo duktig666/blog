@@ -77,7 +77,7 @@ public class ApplyLinkController {
     }
 
     @ApiOperation(value = "查询所有的友情链接信息",notes="根据分页排序条件查询友情链接信息; \n author：JQJ")
-    @ApiImplicitParam(name = "pageVo", value = "分页信息")
+    @ApiParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
     public ResponseEntity<PageResultDTO<ApplyLink>> queryApplyLinkAll (PageVO pageVO ){
         PageResultDTO<ApplyLink> applyLinks = (PageResultDTO<ApplyLink>) this.applyLinkService.queryApplyLinkAll(pageVO);
@@ -85,11 +85,11 @@ public class ApplyLinkController {
     }
 
     @ApiOperation(value = "查询所有符合状态的友情链接信息",notes="根据分页排序，和状态条件查询友情链接信息; \n author：JQJ")
-    @GetMapping("/{state}")
+    @GetMapping("/state/{state}")
     public ResponseEntity<PageResultDTO<ApplyLink>> queryApplyLinksByState(
             @ApiParam(name = "state", value = "友情链接状态") @PathVariable("state") Integer state,
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVO){
-        PageResultDTO<ApplyLink> applyLinks = (PageResultDTO<ApplyLink>) this.applyLinkService.queryApplyLinksByState(state,pageVO);
+        PageResultDTO<ApplyLink> applyLinks = this.applyLinkService.queryApplyLinksByState(state,pageVO);
         return ResponseEntity.ok(applyLinks);
     }
 
