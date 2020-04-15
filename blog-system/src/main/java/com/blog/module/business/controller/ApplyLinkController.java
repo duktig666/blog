@@ -49,7 +49,7 @@ public class ApplyLinkController {
 
     @ApiOperation(value = "批量删除友情链接信息",notes="根据友情链接id集合批量删除友情链接信息; \n author：JQJ")
     @ApiImplicitParam(name = "applyLinkIds", value = "友情链接id集合", required = true)
-    @DeleteMapping("/ids{applyLinkIds}")
+    @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteApplyLinks (@Valid @PathVariable("applyLinkIds") List<Long> applyLinkIds ){
         this.applyLinkService.deleteApplyLinks(applyLinkIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -85,7 +85,7 @@ public class ApplyLinkController {
     }
 
     @ApiOperation(value = "查询所有符合状态的友情链接信息",notes="根据分页排序，和状态条件查询友情链接信息; \n author：JQJ")
-    @GetMapping("/state/{state}")
+    @GetMapping("/{state}")
     public ResponseEntity<PageResultDTO<ApplyLink>> queryApplyLinksByState(
             @ApiParam(name = "state", value = "友情链接状态") @PathVariable("state") Integer state,
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVO){

@@ -49,7 +49,7 @@ public class VisitorController {
 
     @ApiOperation(value = "批量删除游客信息",notes="根据游客id集合批量删除游客信息; \n author：JQJ")
     @ApiImplicitParam(name = "blogTypeIds", value = "游客id集合", required = true)
-    @DeleteMapping("/ids/{visitorIds}")
+    @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteVisitors (@Valid @PathVariable("visitorIds") List<Long> visitorIds ){
         this.visitorService.deleteVisitors(visitorIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
