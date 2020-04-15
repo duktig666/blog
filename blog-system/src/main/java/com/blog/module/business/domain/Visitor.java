@@ -50,6 +50,11 @@ public class Visitor implements Serializable {
     @ApiModelProperty(value = "游客头像")
     private String picture;
 
+    /** 身份标识，0代表游客，1代表博主 */
+    @Column(name="identity")
+    @ApiModelProperty(value = "身份标识，0代表游客，1代表博主")
+    private Integer identity;
+
     /** 是否删除 */
     @Column(name="is_delete")
     @ApiModelProperty(value = "是否删除")

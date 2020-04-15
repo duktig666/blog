@@ -1,9 +1,7 @@
 package com.blog.module.business;
 
 import com.blog.AppRun;
-import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.Observe;
-import com.blog.module.business.domain.bo.BlogObserveBO;
 import com.blog.module.business.domain.bo.ObserveBO;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
 import com.blog.module.business.mapper.ObserveMapper;
@@ -85,8 +83,9 @@ public class ObserveTest {
 
     }
 
+    @Test
     public void test(){
-
+        System.out.println(observeMapper.queryFristObserveList(1L));
 
     }
 

@@ -1,6 +1,5 @@
 package com.blog.module.business.domain.bo;
 
-import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.Visitor;
 import lombok.Data;
@@ -34,12 +33,6 @@ public class BlogObserveBO {
          * 评论者是游客，返回游客信息
          */
         private Visitor visitor;
-
-        /**
-         * 评论者是博主，返回博主信息
-         */
-        private Blogger blogger;
-
 
         /**
          * 一级评论信息的二级回复
