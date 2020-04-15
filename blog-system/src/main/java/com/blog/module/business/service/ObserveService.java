@@ -2,6 +2,9 @@ package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.bo.ObserveBO;
+
+import java.util.List;
 
 /**
  * Description：评论的业务处理
@@ -46,5 +49,5 @@ public interface ObserveService {
      * @author RenShiWei
      * Date: 2020/4/15 8:29
      */
-    void queryObserveByBlogId(Long blogId);
+    List<ObserveBO> queryObserveByBlogId( Long blogId);
 }

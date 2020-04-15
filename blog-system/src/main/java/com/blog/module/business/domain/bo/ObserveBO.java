@@ -1,13 +1,14 @@
 package com.blog.module.business.domain.bo;
 
-
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.Visitor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
+import javax.persistence.Transient;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,51 +21,47 @@ import java.sql.Timestamp;
 @Data
 public class ObserveBO extends Observe{
 
-
     /**
      * 评论者是游客，返回游客信息
      */
     private Visitor visitor;
 
-
-//    /** 评论id */
-//    private Long id;
-//
-//    /** 所属博客id */
-//    private Long blogId;
-//
-//    /** 评论者id */
-//    private Long observerId;
-//
-//    /** 评论者类型 */
-//    private Integer observerType;
-//
-//    /** 评论内容 */
-//    private String observeContent;
-//
-//    /** 评论上一级的id */
-//    private Long lastId;
-//
-//    /** 是否删除 */
-//    private Boolean delete;
-//
-//    /** 创建时间（评论时间） */
-//    private Timestamp createDate;
-//
-//    /** 修改删除 */
-//    private Timestamp updateDate;
-
-    /**
-     * 评论信息
-     */
-    //private Observe observe;
-
-
-
     /**
      * 一级评论信息的二级回复
      */
-    //private List<ObserveBO> secondObserveList;
+    @Transient
+    private List<ObserveBO> secondObserveList;
+
+    /* ======================================  */
+
+
+    /** 评论id */
+    private Long id;
+
+    /** 所属博客id */
+    private Long blogId;
+
+    /** 评论者id */
+    private Long observerId;
+
+    /** 评论者类型 */
+    private Integer observerType;
+
+    /** 评论内容 */
+    private String observeContent;
+
+    /** 评论上一级的id */
+    private Long lastId;
+
+    /** 是否删除 */
+    private Boolean delete;
+
+    /** 创建时间（评论时间） */
+    private Timestamp createDate;
+
+    /** 修改删除 */
+    private Timestamp updateDate;
+
 
 
 }

@@ -5,6 +5,7 @@ import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.bo.ObserveBO;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
 import com.blog.module.business.mapper.ObserveMapper;
+import com.blog.module.business.service.ObserveService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.PipedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class ObserveTest {
 
     @Autowired
     private ObserveMapper observeMapper;
+
+    @Autowired
+    private ObserveService observeService;
 
     @Test
     public void testObserveByNode () {
@@ -86,7 +91,13 @@ public class ObserveTest {
     @Test
     public void test(){
         System.out.println(observeMapper.queryFristObserveList(1L));
+        System.out.println(observeMapper.querySecondObserveList(1L));
 
+    }
+
+    @Test
+    public void test2(){
+        System.out.println(observeService.queryObserveByBlogId(1L));
     }
 
 
