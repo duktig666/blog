@@ -60,7 +60,6 @@ public class ApplyLink implements Serializable {
     /** 申请状态（0为申请中，1为申请成功，2为申请失败） */
     @Column(name="state")
     @ApiModelProperty(value = "申请状态（0为申请中，1为申请成功，2为申请失败）")
-    @NotNull(message = "申请状态不能为空")
     private Integer state;
 
     /** 创建时间 */

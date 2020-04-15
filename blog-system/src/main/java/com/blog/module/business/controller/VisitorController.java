@@ -48,14 +48,14 @@ public class VisitorController {
     }
 
     @ApiOperation(value = "批量删除游客信息",notes="根据游客id集合批量删除游客信息; \n author：JQJ")
-    @ApiImplicitParam(name = "blogTypeIds", value = "游客id集合", required = true)
+    @ApiImplicitParam(name = "visitorIds", value = "游客id集合", required = true)
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteVisitors (@Valid @PathVariable("visitorIds") List<Long> visitorIds ){
         this.visitorService.deleteVisitors(visitorIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @ApiOperation(value = "修改游客信息",notes="根据前台传入的信息进行修改对应游客信息; \n author：JQJ")
-    @ApiParam(name = "blogType", value = "修改的游客信息", required = true)
+    @ApiParam(name = "visitor", value = "修改的游客信息", required = true)
     @PutMapping
     public ResponseEntity<Void> updateVisitor (@Validated(Visitor.UpdateGroup.class) Visitor visitor ){
         this.visitorService.updateVisitor(visitor);
@@ -63,7 +63,7 @@ public class VisitorController {
     }
 
     @ApiOperation(value = "查询一位游客信息",notes="根据游客id查询对应游客信息; \n author：JQJ")
-    @ApiImplicitParam(name = "blogTypeId", value = "游客id", required = true)
+    @ApiImplicitParam(name = "visitorId", value = "游客id", required = true)
     @GetMapping("/{visitorId}")
     public ResponseEntity<Visitor> queryVisitorById (@Valid @PathVariable("visitorId") Long visitorId ){
         Visitor visitor = this.visitorService.queryVisitor(visitorId);
@@ -71,7 +71,7 @@ public class VisitorController {
     }
 
     @ApiOperation(value = "查询所有的游客信息",notes="根据分页排序条件查询游客信息; \n author：JQJ")
-    @ApiImplicitParam(name = "pageVo", value = "分页信息")
+    @ApiParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
     public ResponseEntity<PageResultDTO<Visitor>> queryVisitorAll ( PageVO pageVo ){
         PageResultDTO<Visitor> visitors = (PageResultDTO<Visitor>) this.visitorService.queryVisitorAll(pageVo);
