@@ -2,6 +2,7 @@ package com.blog.module.business.mapper;
 
 import com.blog.module.business.domain.Observe;
 import com.blog.mapper.CommentMapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,4 +13,8 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public interface ObserveMapper extends CommentMapper<Observe> {
+
+//    @Select("SELECT FROM observe o,visitor v,blogger b WHERE")
+//    void queryObserve();
+
 }
