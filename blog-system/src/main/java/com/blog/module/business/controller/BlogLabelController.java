@@ -33,49 +33,53 @@ public class BlogLabelController {
     private BlogLabelService blogLabelService;
 
     @ApiOperation(value = "新增博客标签", notes = "新增一条博客标签;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogLabel", value = "新增的博客标签信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveBlogType ( @ApiParam(name = "blogLabel", value = "新增的博客标签信息", required = true) @Validated
-                                                       BlogLabel blogLabel ) {
+    public ResponseEntity<Void> saveBlogType (
+            @ApiParam(name = "blogLabel", value = "新增的博客标签信息", required = true)
+            @Validated BlogLabel blogLabel ) {
         blogLabelService.saveBlogLabel(blogLabel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "删除单个博客标签", notes = "根据博客标签id删除;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogLabelId", value = "博客标签id", required = true)
     @DeleteMapping("/{blogLabelId}")
-    public ResponseEntity<Void> deleteBlogType ( @Valid @PathVariable Long blogLabelId ) {
+    public ResponseEntity<Void> deleteBlogType (
+            @ApiParam(name = "blogLabelId", value = "博客标签id", required = true)
+            @Valid @PathVariable Long blogLabelId ) {
         blogLabelService.deleteBlogLabel(blogLabelId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "批量删除博客标签", notes = "根据博客标签id集合批量删除;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogLabelIds", value = "博客标签id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteBlogTypes ( List<Long> blogLabelIds ) {
+    public ResponseEntity<Void> deleteBlogTypes (
+            @ApiParam(name = "blogLabelIds", value = "博客标签id集合", required = true)
+            List<Long> blogLabelIds ) {
         blogLabelService.deleteBlogLabels(blogLabelIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "修改博客标签信息", notes = "根据前台传入的信息进行修改;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogLabel", value = "修改的博客标签信息", required = true)
     @PutMapping
-    public ResponseEntity<Void> updateBlogType (@Validated(BlogType.UpdateGroup.class) BlogLabel blogLabel ) {
+    public ResponseEntity<Void> updateBlogType (
+            @ApiParam(name = "blogLabel", value = "修改的博客标签信息", required = true)
+            @Validated(BlogType.UpdateGroup.class) BlogLabel blogLabel ) {
         blogLabelService.updateBlogLabel(blogLabel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "查询一条博客标签信息", notes = "根据博客标签id查询;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogLabelId", value = "博客标签id", required = true)
     @GetMapping("/{blogLabelId}")
-    public ResponseEntity<BlogLabel> queryBlogById ( @Valid @PathVariable Long blogLabelId ) {
+    public ResponseEntity<BlogLabel> queryBlogById (
+            @ApiParam(name = "blogLabelId", value = "博客标签id", required = true)
+            @Valid @PathVariable Long blogLabelId ) {
         return ResponseEntity.ok(blogLabelService.queryBlogLabelById(blogLabelId));
     }
 
     @ApiOperation(value = "查询所有的博客标签（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
-    @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<BlogLabel>> queryBlogAll ( @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
+    public ResponseEntity<PageResultDTO<BlogLabel>> queryBlogAll (
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
         return ResponseEntity.ok(blogLabelService.queryBlogLabelAll(pageVo));
     }
 

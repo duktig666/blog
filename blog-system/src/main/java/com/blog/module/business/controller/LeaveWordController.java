@@ -33,32 +33,36 @@ public class LeaveWordController {
     private LeaveWordService leaveWordService;
 
     @ApiOperation(value = "新增留言信息",notes="新增一条留言信息; \n author：JQJ")
-    @ApiParam(name = "leaveWord", value = "新增的留言信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveLeaveWord (@Validated User user, LeaveWord leaveWord) {
+    public ResponseEntity<Void> saveLeaveWord (
+            @ApiParam(name = "leaveWord", value = "新增的留言信息", required = true)
+            @Validated User user, LeaveWord leaveWord) {
         this.leaveWordService.saveLeaveWord(user,leaveWord);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "删除单个留言信息",notes="根据留言id删除对应留言信息; \n author：JQJ")
-    @ApiImplicitParam(name = "leaveWordId", value = "留言", required = true)
     @DeleteMapping("{leaveWordId}")
-    public ResponseEntity<Void> deleteLeaveWord (@Valid @PathVariable("leaveWordId") Long leaveWordId ){
+    public ResponseEntity<Void> deleteLeaveWord (
+            @ApiParam(name = "leaveWordId", value = "要删除留言id", required = true)
+            @Valid @PathVariable("leaveWordId") Long leaveWordId ){
         this.leaveWordService.deleteLeaveWord(leaveWordId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "批量删除留言信息",notes="根据留言id集合批量删除留言信息; \n author：JQJ")
-    @ApiImplicitParam(name = "leaveWordIds", value = "留言id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteLeaveWords (@RequestParam("leaveWordIds") List<Long> leaveWordIds ){
+    public ResponseEntity<Void> deleteLeaveWords (
+            @ApiParam(name = "leaveWordIds", value = "留言id集合",required = true)
+            @RequestParam("leaveWordIds") List<Long> leaveWordIds ){
         this.leaveWordService.deleteLeaveWords(leaveWordIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @ApiOperation(value = "修改留言信息",notes="根据前台传入的信息进行修改对应留言信息; \n author：JQJ")
-    @ApiParam(name = "leaveWord", value = "修改的留言信息", required = true)
     @PutMapping
-    public ResponseEntity<String> updateLeaveWord (@Validated(LeaveWord.UpdateGroup.class) LeaveWord leaveWord ){
+    public ResponseEntity<String> updateLeaveWord (
+            @ApiParam(name = "leaveWord", value = "修改的留言信息", required = true)
+            @Validated(LeaveWord.UpdateGroup.class) LeaveWord leaveWord ){
         this.leaveWordService.updateLeaveWord(leaveWord);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -72,9 +76,9 @@ public class LeaveWordController {
 //    }
 
     @ApiOperation(value = "查询所有的留言信息",notes="根据分页排序条件查询留言信息; \n author：JQJ")
-    @ApiParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<LeaveWordBO>> queryLeaveWordAll (PageVO pageVO ){
+    public ResponseEntity<PageResultDTO<LeaveWordBO>> queryLeaveWordAll (
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVO ){
         PageResultDTO<LeaveWordBO> leaveWords = this.leaveWordService.queryLeaveWordAll(pageVO);
         return ResponseEntity.ok(leaveWords);
     }

@@ -22,21 +22,21 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name="user")
-@ApiModel("游客")
+@ApiModel("用户")
 public class User implements Serializable {
 
-    /** 游客id */
+    /** 用户id */
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @ApiModelProperty(value = "游客id")
-    @NotNull(groups = UpdateGroup.class,message = "修改游客信息，id不可以空")
+    @ApiModelProperty(value = "用户id")
+    @NotNull(groups = UpdateGroup.class,message = "修改用户信息，id不可以空")
     private Long id;
 
-    /** 游客昵称 */
+    /** 用户昵称 */
     @Column(name="nickname")
-    @ApiModelProperty(value = "游客昵称")
-    @NotBlank(message = "游客昵称不能为空")
+    @ApiModelProperty(value = "用户昵称")
+    @NotBlank(message = "用户昵称不能为空")
     private String nickname;
 
     /** 邮箱 */
@@ -45,9 +45,9 @@ public class User implements Serializable {
     @Email
     private String email;
 
-    /** 游客头像 */
+    /** 用户头像 */
     @Column(name="picture")
-    @ApiModelProperty(value = "游客头像")
+    @ApiModelProperty(value = "用户头像")
     private String picture;
 
     /** 身份标识，0代表游客，1代表博主 */

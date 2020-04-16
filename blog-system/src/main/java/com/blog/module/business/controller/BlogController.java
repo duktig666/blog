@@ -46,17 +46,19 @@ public class BlogController {
     }
 
     @ApiOperation(value = "删除一条博客", notes = "根据博客id，删除一条博客（并维护中间表）;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogId", value = "博客id", required = true)
     @DeleteMapping("/{blogId}")
-    public ResponseEntity<Void> deleteBlog ( @Valid @PathVariable Long blogId ) {
+    public ResponseEntity<Void> deleteBlog (
+            @ApiParam(name = "blogId", value = "博客id", required = true)
+            @Valid @PathVariable Long blogId ) {
         blogService.deleteBlog(blogId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "批量删除博客", notes = "根据博客id集合，批量删除博客（并维护中间表）;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogIds", value = "博客id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteBlogs ( @Valid List<Long> blogIds ) {
+    public ResponseEntity<Void> deleteBlogs (
+            @ApiParam(name = "blogIds", value = "博客id集合", required = true)
+            @Valid List<Long> blogIds ) {
         blogService.deleteBlogs(blogIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -72,9 +74,10 @@ public class BlogController {
     }
 
     @ApiOperation(value = "查询一条博客信息", notes = "根据博客id，查询一条博客的详细信息（包含博客类型和博客标签）;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogId", value = "博客标签id", required = true)
     @GetMapping("/{blogId}")
-    public ResponseEntity<BlogBO> queryBlogById ( @Valid @PathVariable Long blogId ) {
+    public ResponseEntity<BlogBO> queryBlogById (
+            @ApiParam(name = "blogId", value = "博客标签id", required = true)
+            @Valid @PathVariable Long blogId ) {
         return ResponseEntity.ok(blogService.queryBlogByBlogId(blogId));
     }
 

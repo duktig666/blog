@@ -32,47 +32,52 @@ public class BlogTypeController {
     private BlogTypeService blogTypeService;
 
     @ApiOperation(value = "新增博客类型", notes = "新增一条博客信息;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogType", value = "新增的博客类型信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveBlogType (@ApiParam(name = "blogType", value = "新增的博客类型信息", required = true)
-                                                  @Validated BlogType blogType ) {
+    public ResponseEntity<Void> saveBlogType (
+            @ApiParam(name = "blogType", value = "新增的博客类型信息", required = true)
+            @Validated BlogType blogType ) {
         blogTypeService.saveBlogType(blogType);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "删除单个博客类型", notes = "根据博客类型id删除;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogTypeId", value = "博客类型id", required = true)
     @DeleteMapping("/{blogTypeId}")
-    public ResponseEntity<Void> deleteBlogType ( @Valid @PathVariable Long blogTypeId ) {
+    public ResponseEntity<Void> deleteBlogType (
+            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true)
+            @Valid @PathVariable Long blogTypeId ) {
         blogTypeService.deleteBlogType(blogTypeId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "批量删除博客类型", notes = "根据博客类型id集合批量删除;\nauthor：RSW")
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteBlogTypes (@ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true) List<Long> blogTypeIds ) {
+    public ResponseEntity<Void> deleteBlogTypes (
+            @ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true) List<Long> blogTypeIds ) {
         blogTypeService.deleteBlogTypes(blogTypeIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "修改博客类型信息", notes = "根据前台传入的信息进行修改;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogType", value = "修改的博客类型信息", required = true)
     @PutMapping
-    public ResponseEntity<Void> updateBlogType ( @Validated(BlogType.UpdateGroup.class) BlogType blogType ) {
+    public ResponseEntity<Void> updateBlogType (
+            @ApiParam(name = "blogType", value = "修改的博客类型信息", required = true)
+            @Validated(BlogType.UpdateGroup.class) BlogType blogType ) {
         blogTypeService.updateBlogType(blogType);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "查询一条博客类型信息", notes = "根据博客类型id查询;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogTypeId", value = "博客类型id", required = true)
     @GetMapping("/{blogTypeId}")
-    public ResponseEntity<BlogType> queryBlogById ( @Valid @PathVariable Long blogTypeId ) {
+    public ResponseEntity<BlogType> queryBlogById (
+            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true)
+            @Valid @PathVariable Long blogTypeId ) {
         return ResponseEntity.ok(blogTypeService.queryBlogTypeById(blogTypeId));
     }
 
     @ApiOperation(value = "查询所有的博客类型（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<BlogType>> queryBlogAll (@ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
+    public ResponseEntity<PageResultDTO<BlogType>> queryBlogAll (
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
         return ResponseEntity.ok(blogTypeService.queryBlogTypeAll(pageVo));
     }
 
