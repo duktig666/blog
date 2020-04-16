@@ -31,7 +31,7 @@ public class BlogTypeController {
     @Autowired
     private BlogTypeService blogTypeService;
 
-    @ApiOperation(value = "新增博客类型", notes = "新增一条博客信息;\nauthor：RSW")
+    @ApiOperation(value = "新增博客类型", notes = "新增一条博客类型信息;\nauthor：RSW")
     @PostMapping
     public ResponseEntity<Void> saveBlogType (
             @ApiParam(name = "blogType", value = "新增的博客类型信息", required = true)
@@ -52,7 +52,8 @@ public class BlogTypeController {
     @ApiOperation(value = "批量删除博客类型", notes = "根据博客类型id集合批量删除;\nauthor：RSW")
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteBlogTypes (
-            @ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true) List<Long> blogTypeIds ) {
+            @ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true)
+            @RequestParam("blogTypeIds") List<Long> blogTypeIds ) {
         blogTypeService.deleteBlogTypes(blogTypeIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

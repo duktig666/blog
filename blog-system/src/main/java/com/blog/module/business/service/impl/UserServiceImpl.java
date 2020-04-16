@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User queryVisitor(Long visitorId) {
-        User user = this.queryVisitor(visitorId);
+        User user = this.userMapper.selectByPrimaryKey(visitorId);
         if (user == null) {
             throw new BaseException("暂无此用户信息！");
         }

@@ -51,7 +51,7 @@ public class ApplyLinkController {
     @ApiOperation(value = "批量删除友情链接信息",notes="根据友情链接id集合批量删除友情链接信息; \n author：JQJ")
     @ApiParam(name = "applyLinkIds", value = "友情链接id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteApplyLinks (@Valid @PathVariable("applyLinkIds") List<Long> applyLinkIds ){
+    public ResponseEntity<Void> deleteApplyLinks (@Valid @RequestParam("applyLinkIds") List<Long> applyLinkIds ){
         this.applyLinkService.deleteApplyLinks(applyLinkIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

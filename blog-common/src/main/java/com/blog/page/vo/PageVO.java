@@ -1,6 +1,7 @@
 package com.blog.page.vo;
 
 import lombok.Data;
+import lombok.Value;
 
 /**
  * Description：

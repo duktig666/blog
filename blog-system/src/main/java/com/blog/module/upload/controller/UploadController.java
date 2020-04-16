@@ -4,6 +4,7 @@ import com.blog.module.upload.service.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,9 +41,10 @@ public class UploadController {
      * Date: 2020/4/13 14:25
      */
     @ApiOperation(value = "上传图片",notes="根据上传图片并返回url; author：JQJ")
-    @ApiImplicitParam(name = "file", value = "选择上传的图片", required = true)
     @PostMapping("/image")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file){
+    public ResponseEntity<String> uploadImage(
+            @ApiParam(name = "file", value = "选择上传的图片", required = true)
+            @RequestParam("file") MultipartFile file){
         String url = this.uploadService.upload(file);
         //判断url是否为空
         if(StringUtils.isBlank(url)){

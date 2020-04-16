@@ -35,12 +35,12 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
-    @ApiOperation(value = "新增博客类型", notes = "新增一条博客信息;\nauthor：RSW")
+    @ApiOperation(value = "新增博客", notes = "新增一条博客信息;\nauthor：RSW")
     @PostMapping
     public ResponseEntity<Void> saveBlogType (
             @ApiParam(name = "blog", value = "新增的博客信息", required = true) @Validated Blog blog,
-            @ApiParam(name = "blogLabelIds", value = "新增博客对应的博客标签集合", required = true) List<Long> blogLabelIds
-    ) {
+            @ApiParam(name = "blogLabelIds", value = "新增博客对应的博客标签集合", required = true)
+            @RequestParam("blogLabelIds") List<Long> blogLabelIds) {
         blogService.saveBlog(blog, blogLabelIds);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -58,7 +58,7 @@ public class BlogController {
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteBlogs (
             @ApiParam(name = "blogIds", value = "博客id集合", required = true)
-            @Valid List<Long> blogIds ) {
+            @Valid @RequestParam List<Long> blogIds ) {
         blogService.deleteBlogs(blogIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -67,7 +67,8 @@ public class BlogController {
     @PutMapping
     public ResponseEntity<Void> updateBlog (
             @ApiParam(name = "blog", value = "修改的博客信息", required = true) @Validated(Blog.UpdateGroup.class) Blog blog,
-            @ApiParam(name = "blogLabelIds", value = "修改博客对应的博客标签集合", required = true) List<Long> blogLabelIds
+            @ApiParam(name = "blogLabelIds", value = "修改博客对应的博客标签集合", required = true)
+            @RequestParam List<Long> blogLabelIds
     ) {
         blogService.updateBlog(blog, blogLabelIds);
         return ResponseEntity.status(HttpStatus.CREATED).build();

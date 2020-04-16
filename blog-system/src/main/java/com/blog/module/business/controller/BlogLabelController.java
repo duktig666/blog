@@ -54,7 +54,7 @@ public class BlogLabelController {
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteBlogTypes (
             @ApiParam(name = "blogLabelIds", value = "博客标签id集合", required = true)
-            List<Long> blogLabelIds ) {
+            @RequestParam("blogLabelIds")List<Long> blogLabelIds ) {
         blogLabelService.deleteBlogLabels(blogLabelIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

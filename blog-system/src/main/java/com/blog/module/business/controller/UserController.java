@@ -53,7 +53,7 @@ public class UserController {
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteVisitors (
             @ApiParam(name = "visitorIds", value = "用户id集合", required = true)
-            @Valid List<Long> visitorIds ){
+            @Valid @RequestParam List<Long> visitorIds ){
         this.userService.deleteVisitors(visitorIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -77,8 +77,8 @@ public class UserController {
 
     @ApiOperation(value = "查询所有的用户信息",notes="根据分页排序条件查询用户信息(用identity判断用户的身份); \n author：JQJ")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<User>> queryVisitorAll (
-            @ApiParam(name = "pageVo", value = "分页信息") int identity,PageVO pageVo ){
+    public ResponseEntity<PageResultDTO<User>> queryVisitorAll (int identity,
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ){
         PageResultDTO<User> visitors = this.userService.queryVisitorAll(identity,pageVo);
         return ResponseEntity.ok(visitors);
     }
