@@ -2,7 +2,7 @@ package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.User;
-import com.blog.module.business.domain.bo.ObserveBO;
+import com.blog.module.business.domain.bo.ObserveNodeBO;
 
 import java.util.List;
 
@@ -49,5 +49,5 @@ public interface ObserveService {
      * @author RenShiWei
      * Date: 2020/4/15 8:29
      */
-    List<ObserveBO> queryObserveByBlogId( Long blogId);
+    List<ObserveNodeBO> queryObserveByBlogId( Long blogId);
 }

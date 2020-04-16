@@ -16,14 +16,23 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserMapper extends CommentMapper<User> {
 
-    @Select("SELECT * FROM visitor WHERE id=#{id}")
+    /**
+     * 功能描述：根据主键id查询用户信息
+     * （在observe中一对一关系使用）
+     *
+     * @param id 用户id
+     * @return 用户信息
+     * @author RenShiWei
+     * Date: 2020/4/16 10:43
+     */
+    @Select("SELECT * FROM user WHERE id=#{id}")
     @Results({
-            @Result(id=true,column="id",property="id"),
-            @Result(column="create_date",property="createDate"),
-            @Result(column="last_id",property="lastId"),
-            @Result(column="is_delete",property="delete"),
-            @Result(column="update_date",property="updateDate")
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "create_date", property = "createDate"),
+            @Result(column = "last_id", property = "lastId"),
+            @Result(column = "is_delete", property = "delete"),
+            @Result(column = "update_date", property = "updateDate")
     })
-    User queryVisitorForObserve(Long id);
+    User queryUserForObserve ( Long id );
 
 }

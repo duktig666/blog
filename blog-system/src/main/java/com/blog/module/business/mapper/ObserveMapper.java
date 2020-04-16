@@ -2,7 +2,7 @@ package com.blog.module.business.mapper;
 
 import com.blog.module.business.domain.Observe;
 import com.blog.mapper.CommentMapper;
-import com.blog.module.business.domain.bo.ObserveBO;
+import com.blog.module.business.domain.bo.ObserveNodeBO;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -21,42 +21,56 @@ import java.util.List;
 @Component
 public interface ObserveMapper extends CommentMapper<Observe> {
 
-    @Select("SELECT * FROM observe o LEFT JOIN visitor v " +
-            "ON o.observer_id=v.id " +
+    /**
+     * 功能描述：根据博客id和lastId为空，查询所有的一级评论信息集合
+     * @param blogId 博客id
+     * @return 一级评论信息集合
+     * @author RenShiWei
+     * Date: 2020/4/16 10:37
+     */
+    @Select("SELECT * FROM observe o LEFT JOIN user u " +
+            "ON o.observer_id=u.id " +
             "WHERE o.blog_id=#{blogId} AND o.last_id is null")
     @Results({
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "blog_id", property = "blogId"),
             @Result(column = "observer_id", property = "observerId"),
             @Result(column = "observe_content", property = "observeContent"),
-            @Result(column = "observer_id", property = "visitor",
-                    one = @One(select = "com.blog.module.business.mapper.VisitorMapper.queryVisitorForObserve",
+            @Result(column = "observer_id", property = "user",
+                    one = @One(select = "com.blog.module.business.mapper.UserMapper.queryUserForObserve",
                             fetchType = FetchType.EAGER)),
-            @Result(column = "create_date", property = "createDate"),
             @Result(column = "last_id", property = "lastId"),
             @Result(column = "is_delete", property = "delete"),
+            @Result(column = "create_date", property = "createDate"),
             @Result(column = "update_date", property = "updateDate")
     })
-    List<ObserveBO> queryFristObserveList ( Long blogId );
+    List<ObserveNodeBO> queryFristObserveList ( Long blogId );
 
 
-    @Select("SELECT * FROM observe o LEFT JOIN visitor v " +
-            "ON o.observer_id=v.id " +
+    /**
+     * 功能描述：根据博客id和lastId不为空，查询所有的二级评论信息集合
+     * @param blogId 博客id
+     * @return 二级评论信息集合
+     * @author RenShiWei
+     * Date: 2020/4/16 10:37
+     */
+    @Select("SELECT * FROM observe o LEFT JOIN user u " +
+            "ON o.observer_id=u.id " +
             "WHERE o.blog_id=#{blogId} AND o.last_id is not null")
     @Results({
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "blog_id", property = "blogId"),
             @Result(column = "observer_id", property = "observerId"),
             @Result(column = "observe_content", property = "observeContent"),
-            @Result(column = "observer_id", property = "visitor",
-                    one = @One(select = "com.blog.module.business.mapper.VisitorMapper.queryVisitorForObserve",
+            @Result(column = "observer_id", property = "user",
+                    one = @One(select = "com.blog.module.business.mapper.UserMapper.queryUserForObserve",
                             fetchType = FetchType.EAGER)),
-            @Result(column = "create_date", property = "createDate"),
             @Result(column = "last_id", property = "lastId"),
             @Result(column = "is_delete", property = "delete"),
+            @Result(column = "create_date", property = "createDate"),
             @Result(column = "update_date", property = "updateDate")
     })
-    List<ObserveBO> querySecondObserveList ( Long blogId );
+    List<ObserveNodeBO> querySecondObserveList ( Long blogId );
 
 
 }

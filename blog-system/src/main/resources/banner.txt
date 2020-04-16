@@ -8,3 +8,4 @@
                                                     (__) (__) (_")("_)    (__)   (__)__)
 
                                                    :: Spring Boot ::       (v2.1.0.RELEASE)
+                                                   :: Blog_System ::       (v1.0.0.RELEASE)

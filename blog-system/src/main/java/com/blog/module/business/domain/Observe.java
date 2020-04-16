@@ -44,12 +44,6 @@ public class Observe implements Serializable {
     @NotNull(message = "评论者id不能为空")
     private Long observerId;
 
-    /** 评论者类型 */
-    @Column(name="observer_type")
-    @ApiModelProperty(value = "评论者类型")
-    @NotNull(message = "评论者类型不能为空")
-    private Integer observerType;
-
     /** 评论内容 */
     @Column(name="observe_content")
     @ApiModelProperty(value = "评论内容")

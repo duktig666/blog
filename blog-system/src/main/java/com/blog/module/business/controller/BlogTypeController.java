@@ -49,9 +49,8 @@ public class BlogTypeController {
     }
 
     @ApiOperation(value = "批量删除博客类型", notes = "根据博客类型id集合批量删除;\nauthor：RSW")
-    @ApiImplicitParam(name = "blogTypeIds", value = "博客类型id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteBlogTypes ( List<Long> blogTypeIds ) {
+    public ResponseEntity<Void> deleteBlogTypes (@ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true) List<Long> blogTypeIds ) {
         blogTypeService.deleteBlogTypes(blogTypeIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -72,7 +71,6 @@ public class BlogTypeController {
     }
 
     @ApiOperation(value = "查询所有的博客类型（可以分页和排序）", notes = "可以分页;\nauthor：RSW")
-    @ApiImplicitParam(name = "pageVo", value = "分页信息")
     @GetMapping("/all")
     public ResponseEntity<PageResultDTO<BlogType>> queryBlogAll (@ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ) {
         return ResponseEntity.ok(blogTypeService.queryBlogTypeAll(pageVo));
