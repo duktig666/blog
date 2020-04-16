@@ -1,7 +1,7 @@
 package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Observe;
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.ObserveBO;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public interface ObserveService {
     /**
      * 功能描述：新增博客评论
      *
-     * @param visitor 游客信息
+     * @param user 游客信息
      * @param observe 评论信息
      * @author RenShiWei
      * Date: 2020/4/15 8:24
      */
-    void saveObserve ( Visitor visitor, Observe observe );
+    void saveObserve (User user, Observe observe );
 
     /**
      * 删除评论

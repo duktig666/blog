@@ -2,12 +2,11 @@ package com.blog.module.business.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.blog.exception.BaseException;
-import com.blog.module.business.domain.ApplyLink;
 import com.blog.module.business.domain.LeaveWord;
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.LeaveWordBO;
 import com.blog.module.business.mapper.LeaveWordMapper;
-import com.blog.module.business.mapper.VisitorMapper;
+import com.blog.module.business.mapper.UserMapper;
 import com.blog.module.business.service.LeaveWordService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
@@ -17,11 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,7 +32,7 @@ public class LeaveWordServiceImpl implements LeaveWordService {
     private LeaveWordMapper leaveWordMapper;
 
     @Autowired
-    private VisitorMapper visitorMapper;
+    private UserMapper userMapper;
     /**
      * 功能描述：增加一条留言信息
      * 问题：如何获得留言游客的id
@@ -46,14 +42,14 @@ public class LeaveWordServiceImpl implements LeaveWordService {
      */
     @Override
     @Transactional
-    public void saveLeaveWord(Visitor visitor,LeaveWord leaveWord) {
+    public void saveLeaveWord(User user, LeaveWord leaveWord) {
         // 新增留言信息的时候，需要先将 该游客的信息添加 游客表，然后将该游客 id 返回
-        int res = this.visitorMapper.insertSelective(visitor);
+        int res = this.userMapper.insertSelective(user);
         if(res == 0) {
             throw new BaseException("增加留言信息失败，未能正确的添加游客信息");
         }
         // 添加游客信息成功后，将 游客id 添加到游客信息中
-        leaveWord.setVisitorId(visitor.getId());
+        leaveWord.setVisitorId(user.getId());
         // 增加一条留言信息
         int res1 = this.leaveWordMapper.insertSelective(leaveWord);
         if(res1 == 0) {
@@ -147,8 +143,8 @@ public class LeaveWordServiceImpl implements LeaveWordService {
         List<LeaveWord> leaveWords = this.leaveWordMapper.selectAll();
         // 根据留言信息中游客id,查找游客信息
         leaveWords.forEach(leaveWord -> {
-                    Visitor visitor = this.visitorMapper.selectByPrimaryKey(leaveWord.getVisitorId());
-                    LeaveWordBO leaveWordBO = new LeaveWordBO(visitor,leaveWord);
+                    User user = this.userMapper.selectByPrimaryKey(leaveWord.getVisitorId());
+                    LeaveWordBO leaveWordBO = new LeaveWordBO(user,leaveWord);
                     leaveWordBOS.add(leaveWordBO);
         }
 

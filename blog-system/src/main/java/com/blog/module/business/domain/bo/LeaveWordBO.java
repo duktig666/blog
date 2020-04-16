@@ -4,8 +4,6 @@ import com.blog.module.business.domain.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * Description：封装 留言 游客
  *
@@ -17,7 +15,7 @@ import java.util.List;
 public class LeaveWordBO {
 
     /** 游客信息 */
-    private Visitor visitor;
+    private User user;
     /** 留言信息 */
     private LeaveWord leaveWord;
 

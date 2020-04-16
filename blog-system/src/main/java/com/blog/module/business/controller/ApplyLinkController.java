@@ -1,7 +1,6 @@
 package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.ApplyLink;
-import com.blog.module.business.domain.Blogger;
 import com.blog.module.business.service.ApplyLinkService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;

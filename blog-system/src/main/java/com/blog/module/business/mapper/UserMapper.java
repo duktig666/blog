@@ -1,16 +1,11 @@
 package com.blog.module.business.mapper;
 
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import com.blog.mapper.CommentMapper;
-import com.blog.module.business.domain.bo.ObserveBO;
-import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 功能描述：Visitor访问数据库类
@@ -19,7 +14,7 @@ import java.util.List;
  * Date: 2020/4/11 9:40
  **/
 @Component
-public interface VisitorMapper extends CommentMapper<Visitor> {
+public interface UserMapper extends CommentMapper<User> {
 
     @Select("SELECT * FROM visitor WHERE id=#{id}")
     @Results({
@@ -29,6 +24,6 @@ public interface VisitorMapper extends CommentMapper<Visitor> {
             @Result(column="is_delete",property="delete"),
             @Result(column="update_date",property="updateDate")
     })
-    Visitor queryVisitorForObserve(Long id);
+    User queryVisitorForObserve(Long id);
 
 }

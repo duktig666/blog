@@ -2,7 +2,7 @@ package com.blog.module.business.service;
 
 
 import com.blog.module.business.domain.LeaveWord;
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.LeaveWordBO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
@@ -20,11 +20,11 @@ public interface LeaveWordService {
      * 功能描述：增加一条留言信息
      *
      * @param leaveWord
-     * @param visitor
+     * @param user
      * @author jiaoqianjin
      * Date: 2020/4/14 8:17
      */
-    void saveLeaveWord (Visitor visitor,LeaveWord leaveWord);
+    void saveLeaveWord (User user, LeaveWord leaveWord);
     
     /**
      * 功能描述：根据留言id,删除对应留言信息

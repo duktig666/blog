@@ -1,13 +1,12 @@
 package com.blog.module.business.domain.bo;
 
 import com.blog.module.business.domain.Observe;
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Transient;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +23,7 @@ public class ObserveBO extends Observe{
     /**
      * 评论者是游客，返回游客信息
      */
-    private Visitor visitor;
+    private User user;
 
     /**
      * 一级评论信息的二级回复

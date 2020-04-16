@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 2020/4/15 8:31
  **/
 @Data
-public class ObserveNodeBO {
+public class ObserveNodeBO extends Observe{
 
     /**
      * 评论id

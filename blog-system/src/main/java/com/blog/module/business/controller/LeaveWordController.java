@@ -1,7 +1,7 @@
 package com.blog.module.business.controller;
 
 import com.blog.module.business.domain.LeaveWord;
-import com.blog.module.business.domain.Visitor;
+import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.LeaveWordBO;
 import com.blog.module.business.service.LeaveWordService;
 import com.blog.page.dto.PageResultDTO;
@@ -35,8 +35,8 @@ public class LeaveWordController {
     @ApiOperation(value = "新增留言信息",notes="新增一条留言信息; \n author：JQJ")
     @ApiParam(name = "leaveWord", value = "新增的留言信息", required = true)
     @PostMapping
-    public ResponseEntity<Void> saveLeaveWord (@Validated Visitor visitor, LeaveWord leaveWord) {
-        this.leaveWordService.saveLeaveWord(visitor,leaveWord);
+    public ResponseEntity<Void> saveLeaveWord (@Validated User user, LeaveWord leaveWord) {
+        this.leaveWordService.saveLeaveWord(user,leaveWord);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -51,7 +51,7 @@ public class LeaveWordController {
     @ApiOperation(value = "批量删除留言信息",notes="根据留言id集合批量删除留言信息; \n author：JQJ")
     @ApiImplicitParam(name = "leaveWordIds", value = "留言id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteLeaveWords (@Valid @PathVariable("leaveWordIds") List<Long> leaveWordIds ){
+    public ResponseEntity<Void> deleteLeaveWords (@RequestParam("leaveWordIds") List<Long> leaveWordIds ){
         this.leaveWordService.deleteLeaveWords(leaveWordIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
