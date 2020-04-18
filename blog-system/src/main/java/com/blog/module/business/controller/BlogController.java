@@ -5,7 +5,6 @@ import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.domain.bo.BlogBO;
 import com.blog.module.business.service.BlogService;
-import com.blog.module.business.service.dto.BlogDimQueryDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
@@ -58,7 +57,7 @@ public class BlogController {
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteBlogs (
             @ApiParam(name = "blogIds", value = "博客id集合", required = true)
-            @Valid @RequestParam List<Long> blogIds ) {
+            @Valid @RequestParam("blogIds") List<Long> blogIds ) {
         blogService.deleteBlogs(blogIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -82,13 +81,13 @@ public class BlogController {
         return ResponseEntity.ok(blogService.queryBlogByBlogId(blogId));
     }
 
-    @ApiOperation(value = "查询所有的博客信息", notes = "不包含博客类型和博客标签（可以分页和排序）;\nauthor：RSW")
+    @ApiOperation(value = "查询所有的博客信息", notes = "不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询）;\nauthor：RSW")
     @GetMapping("/all")
     public ResponseEntity<PageResultDTO<Blog>> queryBlogAll (
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
-            @ApiParam(name = "blogDimQueryDTO", value = "博客模糊查询所需数据") BlogDimQueryDTO blogDimQueryDTO
+            @ApiParam(name = "blogDimSearchStr", value = "博客模糊查询所需数据") @RequestParam(required = false) String blogDimSearchStr
     ) {
-        return ResponseEntity.ok(blogService.queryBlogList(pageVo, blogDimQueryDTO));
+        return ResponseEntity.ok(blogService.queryBlogList(pageVo, blogDimSearchStr));
     }
 
 }

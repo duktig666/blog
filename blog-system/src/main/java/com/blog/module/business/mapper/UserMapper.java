@@ -2,6 +2,7 @@ package com.blog.module.business.mapper;
 
 import com.blog.module.business.domain.User;
 import com.blog.mapper.CommentMapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -33,6 +34,6 @@ public interface UserMapper extends CommentMapper<User> {
             @Result(column = "is_delete", property = "delete"),
             @Result(column = "update_date", property = "updateDate")
     })
-    User queryUserForObserve ( Long id );
+    User queryUserForObserve (@Param("id") Long id );
 
 }

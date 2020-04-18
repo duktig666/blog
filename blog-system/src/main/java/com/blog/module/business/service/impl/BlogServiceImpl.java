@@ -9,11 +9,11 @@ import com.blog.module.business.mapper.BlogLabelMapper;
 import com.blog.module.business.mapper.BlogMapper;
 import com.blog.module.business.mapper.BlogTypeMapper;
 import com.blog.module.business.service.BlogService;
-import com.blog.module.business.service.dto.BlogDimQueryDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -167,22 +167,22 @@ public class BlogServiceImpl implements BlogService {
      * Date: 2020/4/14 21:08
      */
     @Override
-    public PageResultDTO<Blog> queryBlogList ( PageVO pageVo, BlogDimQueryDTO blogDimQueryDTO ) {
+    public PageResultDTO<Blog> queryBlogList ( PageVO pageVo, String blogDimSearchStr ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
         }
         /*
-            模糊查询
+           模糊查询
          */
         // 初始化example对象
         Example example = new Example(Blog.class);
         Example.Criteria criteria = example.createCriteria();
         //判断是否需要模糊查询
-        if (blogDimQueryDTO != null) {
-            criteria.orLike("title", "%" + blogDimQueryDTO.getTitle() + "%")
-                    .orLike("summary", "%" + blogDimQueryDTO.getSummary() + "%")
-                    .orLike("content", "%" + blogDimQueryDTO.getContent() + "%");
+        if (StringUtils.isNotEmpty(blogDimSearchStr)) {
+            criteria.orLike("title", "%" + blogDimSearchStr + "%")
+                    .orLike("summary", "%" + blogDimSearchStr + "%")
+                    .orLike("content", "%" + blogDimSearchStr + "%");
         }
 
         //查询结果转换为Page对象

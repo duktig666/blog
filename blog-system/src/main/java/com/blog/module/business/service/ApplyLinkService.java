@@ -72,6 +72,6 @@ public interface ApplyLinkService {
      * @author jiaoqianjin
      * Date: 2020/4/14 9:55
      */
-    PageResultDTO queryApplyLinksByState (Integer state, PageVO pageVO);
+    PageResultDTO<ApplyLink> queryApplyLinksByState (Integer state, PageVO pageVO);
 
 }

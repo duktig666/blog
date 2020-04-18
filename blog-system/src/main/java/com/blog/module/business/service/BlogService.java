@@ -2,9 +2,9 @@ package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.bo.BlogBO;
-import com.blog.module.business.service.dto.BlogDimQueryDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/4/14 11:34
      */
-    void deleteBlogs ( List<Long> blogIds );
+    void deleteBlogs (List<Long> blogIds );
 
     /**
      * 功能描述：修改博客信息（并维护中间表，先删除，在新增）
@@ -65,13 +65,13 @@ public interface BlogService {
     BlogBO queryBlogByBlogId ( Long blogId );
 
     /**
-     * 功能描述：查询所有博客的集合（可分页、排序查询）
+     * 功能描述：查询所有博客的集合（可分页、排序查询；可以根据博客标题、博客正文、博客摘要进行模糊查询）
      *
      * @param pageVo 分页、排序信息
-     * @param blogDimQueryDTO 模糊查询所需字段
+     * @param blogDimSearchStr 模糊查询所需字段（可以根据博客标题、博客正文、博客摘要进行模糊查询）
      * @return 博客信息的集合
      * @author RenShiWei
      * Date: 2020/4/14 21:08
      */
-    PageResultDTO<Blog> queryBlogList ( PageVO pageVo, BlogDimQueryDTO blogDimQueryDTO );
+    PageResultDTO<Blog> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
 }

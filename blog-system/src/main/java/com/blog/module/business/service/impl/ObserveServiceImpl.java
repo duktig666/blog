@@ -45,6 +45,7 @@ public class ObserveServiceImpl implements ObserveService {
             throw new BaseException("新增评论信息失败！");
         }
         //新增游客信息
+        observe.setObserverId(user.getId());
         count= userMapper.insertSelective(user);
         if (count == 0) {
             throw new BaseException("新增评论信息失败(游客信息增加失败)！");
@@ -94,7 +95,7 @@ public class ObserveServiceImpl implements ObserveService {
     @Override
     public List<ObserveNodeBO> queryObserveByBlogId ( Long blogId ) {
         //所有未处理的一级评论集合
-        List<ObserveNodeBO> firstObserveList=observeMapper.queryFristObserveList(blogId);
+        List<ObserveNodeBO> firstObserveList=observeMapper.queryFirstObserveList(blogId);
        //所有未处理的二级评论集合
         List<ObserveNodeBO> secondObserveList=observeMapper.querySecondObserveList(blogId);
 

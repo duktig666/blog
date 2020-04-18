@@ -3,10 +3,7 @@ package com.blog.module.business.mapper;
 import com.blog.module.business.domain.Observe;
 import com.blog.mapper.CommentMapper;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +41,7 @@ public interface ObserveMapper extends CommentMapper<Observe> {
             @Result(column = "create_date", property = "createDate"),
             @Result(column = "update_date", property = "updateDate")
     })
-    List<ObserveNodeBO> queryFristObserveList ( Long blogId );
+    List<ObserveNodeBO> queryFirstObserveList (@Param("blogId") Long blogId );
 
 
     /**
@@ -70,7 +67,7 @@ public interface ObserveMapper extends CommentMapper<Observe> {
             @Result(column = "create_date", property = "createDate"),
             @Result(column = "update_date", property = "updateDate")
     })
-    List<ObserveNodeBO> querySecondObserveList ( Long blogId );
+    List<ObserveNodeBO> querySecondObserveList (@Param("blogId") Long blogId );
 
 
 }
