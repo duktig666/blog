@@ -1,7 +1,6 @@
 package com.blog.page.vo;
 
 import lombok.Data;
-import lombok.Value;
 
 /**
  * Description：
@@ -21,4 +20,16 @@ public class PageVO {
     /** 排序方式 */
     private String sort;
 
+    public Integer getCurrentPage() {
+
+        return currentPage = "".equals(currentPage) || currentPage ==null ? 0 : currentPage;
+    }
+
+    public Integer getRows() {
+        return rows = "".equals(rows) || rows ==null ? 20 : rows;
+    }
+
+    public String getSort() {
+        return sort;
+    }
 }

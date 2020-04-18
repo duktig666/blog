@@ -7,7 +7,6 @@ import com.blog.module.business.service.LeaveWordService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,14 +66,6 @@ public class LeaveWordController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-//    @ApiOperation(value = "查询一条留言信息",notes="根据留言id查询对应留言信息; \n author：JQJ")
-//    @ApiImplicitParam(name = "LeaveWordId", value = "留言id", required = true)
-//    @GetMapping("{leaveWordId}")
-//    public ResponseEntity<LeaveWord> queryLeaveWordById (@Valid @PathVariable("leaveWordId") Long leaveWordId ){
-//        LeaveWord leaveWord = this.leaveWordService.queryLeaveWordById(leaveWordId);
-//        return ResponseEntity.ok(leaveWord);
-//    }
-
     @ApiOperation(value = "查询所有的留言信息",notes="根据分页排序条件查询留言信息; \n author：JQJ")
     @GetMapping("/all")
     public ResponseEntity<PageResultDTO<LeaveWordBO>> queryLeaveWordAll (
@@ -82,15 +73,5 @@ public class LeaveWordController {
         PageResultDTO<LeaveWordBO> leaveWords = this.leaveWordService.queryLeaveWordAll(pageVO);
         return ResponseEntity.ok(leaveWords);
     }
-
-//    @ApiOperation(value = "查询所有符合状态的留言信息",notes="根据分页排序，和状态条件查询留言信息; \n author：JQJ")
-//    @GetMapping("/{state}")
-//    public ResponseEntity<PageResultDTO<LeaveWord>> queryLeaveWordsByState(
-//            @ApiParam(name = "replyContent", value = "留言状态") @PathVariable("state") String replyContent,
-//            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVO){
-//        PageResultDTO<LeaveWord> leaveWords = (PageResultDTO<LeaveWord>) this.leaveWordService.queryLeaveWordsByState(replyContent,pageVO);
-//        return ResponseEntity.ok(leaveWords);
-//    }
-
 }
 

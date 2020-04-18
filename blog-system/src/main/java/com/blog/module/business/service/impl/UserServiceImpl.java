@@ -121,6 +121,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageResultDTO<User> queryVisitorAll(int identity,PageVO pageVo) {
         // 分页 排序 查询条件
+        System.out.println(pageVo.getCurrentPage());
         PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
         // 查询所有的友情链接信息
         Example example = new Example(User.class);

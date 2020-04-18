@@ -5,7 +5,6 @@ import com.blog.module.business.service.UserService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +76,9 @@ public class UserController {
 
     @ApiOperation(value = "查询所有的用户信息",notes="根据分页排序条件查询用户信息(用identity判断用户的身份); \n author：JQJ")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<User>> queryVisitorAll (int identity,
-            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ){
+    public ResponseEntity<PageResultDTO<User>> queryVisitorAll (
+            @RequestParam(value = "identity" ,defaultValue = "0") int identity,
+                @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo ){
         PageResultDTO<User> visitors = this.userService.queryVisitorAll(identity,pageVo);
         return ResponseEntity.ok(visitors);
     }
