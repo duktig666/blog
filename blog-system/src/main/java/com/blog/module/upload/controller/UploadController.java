@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 
 @Controller
-@RequestMapping("/upload")
+@RequestMapping("/api/upload")
 @Api(tags = "上传图片模块")
 public class UploadController {
 
