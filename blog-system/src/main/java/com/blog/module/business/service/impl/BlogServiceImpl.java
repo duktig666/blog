@@ -190,7 +190,7 @@ public class BlogServiceImpl implements BlogService {
         if (CollectionUtils.isEmpty(blogPage)) {
             throw new BaseException("暂无博客信息！");
         }
-        return new PageResultDTO<>(blogPage.getTotal(), blogPage.getPageSize(), blogPage);
+        return new PageResultDTO<>(blogPage.getTotal(), blogPage.getPages(), blogPage);
     }
 
 }
