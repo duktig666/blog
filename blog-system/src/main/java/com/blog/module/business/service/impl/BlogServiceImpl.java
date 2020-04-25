@@ -13,6 +13,7 @@ import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -167,7 +169,7 @@ public class BlogServiceImpl implements BlogService {
      * Date: 2020/4/14 21:08
      */
     @Override
-    public PageResultDTO<Blog> queryBlogList ( PageVO pageVo, String blogDimSearchStr ) {
+    public PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
@@ -185,12 +187,26 @@ public class BlogServiceImpl implements BlogService {
                     .orLike("content", "%" + blogDimSearchStr + "%");
         }
 
-        //查询结果转换为Page对象
-        Page<Blog> blogPage = (Page<Blog>) blogMapper.selectByExample(example);
-        if (CollectionUtils.isEmpty(blogPage)) {
+        List<BlogBO> blogBOS = new ArrayList<>();
+        List<Blog> blogs = this.blogMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(blogs)) {
             throw new BaseException("暂无博客信息！");
         }
-        return new PageResultDTO<>(blogPage.getTotal(), blogPage.getPageSize(), blogPage);
+        blogs.forEach(blog -> {
+            //根据博客类型id，查询博客类型信息
+            BlogType blogType = blogTypeMapper.selectByPrimaryKey(blog.getTypeId());
+            //根据博客id，查询博客标签id集合
+            List<Long> blogLabelIds = blogMapper.queryBlogLabelsByBlogId(blog.getId());
+            //根据博客id集合，查询博客标签信息
+            List<BlogLabel> blogLabelList = blogLabelMapper.selectByIdList(blogLabelIds);
+            //将 博客，博客标签，博客类型 封装在 BlogBo中
+            BlogBO blogBO = new BlogBO(blog,blogType,blogLabelList);
+            blogBOS.add(blogBO);
+        });
+        //查询结果转换为PageInfo对象
+        PageInfo<BlogBO> boPageInfo = new PageInfo<>(blogBOS);
+        //返回封装的分页结果集
+        return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
     }
 
 }

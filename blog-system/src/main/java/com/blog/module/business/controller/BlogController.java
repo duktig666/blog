@@ -83,7 +83,7 @@ public class BlogController {
 
     @ApiOperation(value = "查询所有的博客信息", notes = "不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询）;\nauthor：RSW")
     @GetMapping("/all")
-    public ResponseEntity<PageResultDTO<Blog>> queryBlogAll (
+    public ResponseEntity<PageResultDTO<BlogBO>> queryBlogAll (
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
             @ApiParam(name = "blogDimSearchStr", value = "博客模糊查询所需数据") @RequestParam(required = false) String blogDimSearchStr
     ) {

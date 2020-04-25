@@ -73,5 +73,5 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/4/14 21:08
      */
-    PageResultDTO<Blog> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
+    PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
 }
