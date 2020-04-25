@@ -186,7 +186,7 @@ public class BlogServiceImpl implements BlogService {
                     .orLike("summary", "%" + blogDimSearchStr + "%")
                     .orLike("content", "%" + blogDimSearchStr + "%");
         }
-
+        // 封装BlogBO
         List<BlogBO> blogBOS = new ArrayList<>();
         List<Blog> blogs = this.blogMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(blogs)) {
