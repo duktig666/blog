@@ -65,6 +65,5 @@ public class ObserveController {
     ) {
         return ResponseEntity.ok(observeService.queryObserveByBlogId(blogId));
     }
-
 }
 
