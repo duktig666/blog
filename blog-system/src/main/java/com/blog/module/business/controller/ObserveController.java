@@ -58,16 +58,13 @@ public class ObserveController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value = "查询一条博客的所有评论信息", notes = "根据博客id，查询此博客的所有评论信息（链表类型的数据）;\nauthor：RSW")
+    @ApiOperation(value = "查询一篇博客的所有评论信息", notes = "根据博客id，查询此博客的所有评论信息（链表类型的数据）;\nauthor：RSW")
     @GetMapping("/{blogId}")
     public ResponseEntity<List<ObserveNodeBO>> queryObserveByBlogId (
             @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
     ) {
         return ResponseEntity.ok(observeService.queryObserveByBlogId(blogId));
     }
-
-
-
 
 }
 

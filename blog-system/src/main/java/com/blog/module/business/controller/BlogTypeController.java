@@ -1,5 +1,6 @@
 package com.blog.module.business.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.service.BlogTypeService;
 import com.blog.page.dto.PageResultDTO;
@@ -8,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,8 +56,8 @@ public class BlogTypeController {
     @ApiOperation(value = "批量删除博客类型", notes = "根据博客类型id集合批量删除;\nauthor：RSW")
     @DeleteMapping("/ids")
     public ResponseEntity<Void> deleteBlogTypes (
-            @ApiParam(name = "blogTypeIds", value = "博客类型id集合",required = true)
-            @RequestParam("blogTypeIds") List<Long> blogTypeIds ) {
+            @ApiParam(name = "blogTypeIds", value = "博客类型id集合", required = true)
+            @RequestParam List<Long> blogTypeIds ) {
         blogTypeService.deleteBlogTypes(blogTypeIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

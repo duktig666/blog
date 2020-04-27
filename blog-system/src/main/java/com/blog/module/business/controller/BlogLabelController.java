@@ -63,7 +63,7 @@ public class BlogLabelController {
     @PutMapping
     public ResponseEntity<Void> updateBlogType (
             @ApiParam(name = "blogLabel", value = "修改的博客标签信息", required = true)
-            @Validated(BlogType.UpdateGroup.class) BlogLabel blogLabel ) {
+            @Validated(BlogLabel.UpdateGroup.class) BlogLabel blogLabel ) {
         blogLabelService.updateBlogLabel(blogLabel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
