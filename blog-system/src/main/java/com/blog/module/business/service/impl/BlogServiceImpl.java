@@ -197,6 +197,7 @@ public class BlogServiceImpl implements BlogService {
             BlogType blogType = blogTypeMapper.selectByPrimaryKey(blog.getTypeId());
             //根据博客id，查询博客标签id集合
             List<Long> blogLabelIds = blogMapper.queryBlogLabelsByBlogId(blog.getId());
+            System.out.println(blogLabelIds);
             //根据博客id集合，查询博客标签信息
             List<BlogLabel> blogLabelList = blogLabelMapper.selectByIdList(blogLabelIds);
             //将 博客，博客标签，博客类型 封装在 BlogBo中
