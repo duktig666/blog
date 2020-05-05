@@ -42,7 +42,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/4/14 11:34
      */
-    void deleteBlogs (List<Long> blogIds );
+    void deleteBlogs ( List<Long> blogIds );
 
     /**
      * 功能描述：修改博客信息（并维护中间表，先删除，在新增）
@@ -67,7 +67,7 @@ public interface BlogService {
     /**
      * 功能描述：查询所有博客的集合（可分页、排序查询；可以根据博客标题、博客正文、博客摘要进行模糊查询）
      *
-     * @param pageVo 分页、排序信息
+     * @param pageVo           分页、排序信息
      * @param blogDimSearchStr 模糊查询所需字段（可以根据博客标题、博客正文、博客摘要进行模糊查询）
      * @return 博客信息的集合
      * @author RenShiWei
@@ -76,7 +76,19 @@ public interface BlogService {
     PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
 
     /**
+     * 功能描述：查询所有的博客信息(不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询))
+     *
+     * @param pageVo           分页、排序信息
+     * @param blogDimSearchStr 模糊查询所需字段（可以根据博客标题、博客正文、博客摘要进行模糊查询）
+     * @return 博客信息的集合
+     * @author RenShiWei
+     * Date: 2020/5/5 20:40
+     */
+    PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr );
+
+    /**
      * 功能描述：查询博客的总访问量、点赞量、评论量
+     *
      * @return 博客的总访问量、点赞量、评论量的DTO
      * @author RenShiWei
      * Date: 2020/5/5 12:14

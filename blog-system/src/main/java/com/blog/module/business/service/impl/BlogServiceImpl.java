@@ -211,6 +211,43 @@ public class BlogServiceImpl implements BlogService {
     }
 
     /**
+     * 功能描述：查询所有的博客信息(不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询))
+     *
+     * @param pageVo           分页、排序信息
+     * @param blogDimSearchStr 模糊查询所需字段（可以根据博客标题、博客正文、博客摘要进行模糊查询）
+     * @return 博客信息的集合
+     * @author RenShiWei
+     * Date: 2020/5/5 20:40
+     */
+    @Override
+    public PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr ) {
+        //判断是否需要分页和排序
+        if (pageVo != null) {
+            PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
+        }
+        /*
+           模糊查询
+         */
+        // 初始化example对象
+        Example example = new Example(Blog.class);
+        Example.Criteria criteria = example.createCriteria();
+        //判断是否需要模糊查询
+        if (StringUtils.isNotEmpty(blogDimSearchStr)) {
+            criteria.orLike("title", "%" + blogDimSearchStr + "%")
+                    .orLike("summary", "%" + blogDimSearchStr + "%")
+                    .orLike("content", "%" + blogDimSearchStr + "%");
+        }
+        List<Blog> blogs = this.blogMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(blogs)) {
+            throw new BaseException("暂无博客信息！");
+        }
+        //查询结果转换为PageInfo对象
+        PageInfo<Blog> boPageInfo = new PageInfo<>(blogs);
+        //返回封装的分页结果集
+        return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
+    }
+
+    /**
      * 功能描述：查询博客的总访问量、点赞量、评论量
      * @return 博客的总访问量、点赞量、评论量的DTO
      * @author RenShiWei
