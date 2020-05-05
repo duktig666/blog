@@ -5,13 +5,13 @@ import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.domain.bo.BlogBO;
+import com.blog.module.business.service.dto.BlogCountDTO;
 import com.blog.module.business.mapper.BlogLabelMapper;
 import com.blog.module.business.mapper.BlogMapper;
 import com.blog.module.business.mapper.BlogTypeMapper;
 import com.blog.module.business.service.BlogService;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -201,13 +201,28 @@ public class BlogServiceImpl implements BlogService {
             //根据博客id集合，查询博客标签信息
             List<BlogLabel> blogLabelList = blogLabelMapper.selectByIdList(blogLabelIds);
             //将 博客，博客标签，博客类型 封装在 BlogBo中
-            BlogBO blogBO = new BlogBO(blog,blogType,blogLabelList);
+            BlogBO blogBO = new BlogBO(blog, blogType, blogLabelList);
             blogBOS.add(blogBO);
         });
         //查询结果转换为PageInfo对象
         PageInfo<BlogBO> boPageInfo = new PageInfo<>(blogBOS);
         //返回封装的分页结果集
         return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
+    }
+
+    /**
+     * 功能描述：查询博客的总访问量、点赞量、评论量
+     * @return 博客的总访问量、点赞量、评论量的DTO
+     * @author RenShiWei
+     * Date: 2020/5/5 12:14
+     */
+    @Override
+    public BlogCountDTO queryBlogCount () {
+        BlogCountDTO blogCountDTO =new BlogCountDTO();
+        blogCountDTO.setVisitNumbers(blogMapper.queryBlogVisitCount());
+        blogCountDTO.setLikeNumber(blogMapper.queryBlogLikeCount());
+        blogCountDTO.setObserveNumber(blogMapper.queryBlogObserveCount());
+        return blogCountDTO;
     }
 
 }

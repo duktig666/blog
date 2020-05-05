@@ -2,9 +2,9 @@ package com.blog.module.business.service;
 
 import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.bo.BlogBO;
+import com.blog.module.business.service.dto.BlogCountDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -74,4 +74,12 @@ public interface BlogService {
      * Date: 2020/4/14 21:08
      */
     PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
+
+    /**
+     * 功能描述：查询博客的总访问量、点赞量、评论量
+     * @return 博客的总访问量、点赞量、评论量的DTO
+     * @author RenShiWei
+     * Date: 2020/5/5 12:14
+     */
+    BlogCountDTO queryBlogCount ();
 }

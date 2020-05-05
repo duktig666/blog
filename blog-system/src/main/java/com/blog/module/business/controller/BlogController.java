@@ -5,6 +5,7 @@ import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.domain.bo.BlogBO;
 import com.blog.module.business.service.BlogService;
+import com.blog.module.business.service.dto.BlogCountDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
@@ -88,6 +89,12 @@ public class BlogController {
             @ApiParam(name = "blogDimSearchStr", value = "博客模糊查询所需数据") @RequestParam(required = false) String blogDimSearchStr
     ) {
         return ResponseEntity.ok(blogService.queryBlogList(pageVo, blogDimSearchStr));
+    }
+
+    @ApiOperation(value = "查询博客的总访问量、点赞量、评论量", notes = "查询博客的总访问量、点赞量、评论量;\nauthor：RSW")
+    @GetMapping("/count")
+    public ResponseEntity<BlogCountDTO> queryBlogCount (){
+        return ResponseEntity.ok(blogService.queryBlogCount());
     }
 
 }

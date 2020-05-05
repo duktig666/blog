@@ -56,5 +56,9 @@ public class BlogTest {
         System.out.println(blogService.queryBlogByBlogId(1L));
     }
 
+    @Test
+    public void testBlogCount(){
+        System.out.println(blogService.queryBlogCount());
+    }
 }
 
