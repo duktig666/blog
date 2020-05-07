@@ -1,4 +1,4 @@
-package com.blog.module.business.service.dto;
+package com.blog.module.business.domain.vo;
 
 import com.blog.module.business.domain.Blog;
 import lombok.Data;
