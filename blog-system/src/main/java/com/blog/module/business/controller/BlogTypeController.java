@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,10 +55,10 @@ public class BlogTypeController {
     }
 
     @ApiOperation(value = "批量删除博客类型", notes = "根据博客类型id集合批量删除;\nauthor：RSW")
-    @DeleteMapping("/ids")
+    @PostMapping("/ids")
     public ResponseEntity<Void> deleteBlogTypes (
             @ApiParam(name = "blogTypeIds", value = "博客类型id集合", required = true)
-            @RequestParam List<Long> blogTypeIds ) {
+            @RequestBody List<Long> blogTypeIds ) {
         blogTypeService.deleteBlogTypes(blogTypeIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

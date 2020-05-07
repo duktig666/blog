@@ -6,6 +6,7 @@ import com.blog.module.business.domain.BlogType;
 import com.blog.module.business.domain.bo.BlogBO;
 import com.blog.module.business.service.BlogService;
 import com.blog.module.business.service.dto.BlogCountDTO;
+import com.blog.module.business.service.dto.BlogInsertVO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
@@ -38,10 +39,10 @@ public class BlogController {
     @ApiOperation(value = "新增博客", notes = "新增一条博客信息;\nauthor：RSW")
     @PostMapping
     public ResponseEntity<Void> saveBlogType (
-            @ApiParam(name = "blog", value = "新增的博客信息", required = true) @Validated Blog blog,
-            @ApiParam(name = "blogLabelIds", value = "新增博客对应的博客标签集合", required = true)
-            @RequestParam("blogLabelIds") List<Long> blogLabelIds) {
-        blogService.saveBlog(blog, blogLabelIds);
+            @ApiParam(name = "blog", value = "新增的博客信息", required = true) @RequestBody BlogInsertVO blogInsertVO
+    ) {
+        System.out.println(blogInsertVO + "------");
+        blogService.saveBlog(blogInsertVO.getBlog(), blogInsertVO.getBlogLabelIds());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -102,7 +103,7 @@ public class BlogController {
 
     @ApiOperation(value = "查询博客的总访问量、点赞量、评论量", notes = "查询博客的总访问量、点赞量、评论量;\nauthor：RSW")
     @GetMapping("/count")
-    public ResponseEntity<BlogCountDTO> queryBlogCount (){
+    public ResponseEntity<BlogCountDTO> queryBlogCount () {
         return ResponseEntity.ok(blogService.queryBlogCount());
     }
 
