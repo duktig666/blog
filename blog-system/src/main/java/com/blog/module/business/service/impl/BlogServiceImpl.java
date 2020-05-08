@@ -262,4 +262,34 @@ public class BlogServiceImpl implements BlogService {
         return blogCountDTO;
     }
 
+    /**
+     * 功能描述：根据博客类型ID，查询对应类型博客
+     *
+     * @param pageVo 分页 排序信息
+     * @param typeId 博客类型id
+     * @return 博客信息集合
+     * @author jiaoqianjin
+     * Date: 2020/5/6 9:34
+     */
+    @Override
+    public PageResultDTO<Blog> queryBlogByType(PageVO pageVo, Integer typeId) {
+        //判断是否需要分页和排序
+        if (pageVo != null) {
+            PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
+        }
+        // 初始化example对象
+        Example example = new Example(Blog.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("typeId",typeId);
+        List<Blog> blogs = this.blogMapper.selectByExample(example);
+        System.out.println(blogs);
+        if (CollectionUtils.isEmpty(blogs)) {
+            throw new BaseException("暂无类型博客信息！");
+        }
+        //查询结果转换为PageInfo对象
+        PageInfo<Blog> boPageInfo = new PageInfo<>(blogs);
+        //返回封装的分页结果集
+        return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
+    }
+
 }

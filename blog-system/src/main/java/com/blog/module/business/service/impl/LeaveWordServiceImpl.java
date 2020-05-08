@@ -137,7 +137,6 @@ public class LeaveWordServiceImpl implements LeaveWordService {
         if (pageVO != null) {
             PageHelper.startPage(pageVO.getCurrentPage(), pageVO.getRows(), pageVO.getSort());
         }
-//        LeaveWordBO leaveWordBO = new LeaveWordBO();
         List<LeaveWordBO> leaveWordBOS = new ArrayList<>();
         // 查询所有的留言信息
         List<LeaveWord> leaveWords = this.leaveWordMapper.selectAll();

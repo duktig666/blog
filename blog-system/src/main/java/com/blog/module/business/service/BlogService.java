@@ -94,4 +94,15 @@ public interface BlogService {
      * Date: 2020/5/5 12:14
      */
     BlogCountDTO queryBlogCount ();
+
+    /**
+     * 功能描述：根据博客类型ID，查询对应类型博客
+     *
+     * @param pageVo  分页 排序信息
+     * @param typeId 博客类型id
+     * @return 博客信息集合
+     * @author jiaoqianjin
+     * Date: 2020/5/6 9:34
+     */
+    PageResultDTO<Blog> queryBlogByType (PageVO pageVo, Integer typeId);
 }

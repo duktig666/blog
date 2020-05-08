@@ -2,7 +2,6 @@ package com.blog.module.upload.controller;
 
 import com.blog.module.upload.service.UploadService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -24,8 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 
 @Controller
-@RequestMapping("/api/upload")
-@Api(tags = "上传图片模块")
+@RequestMapping("/api/file")
+@Api(tags = "分布式文件模块")
 public class UploadController {
 
     @Autowired
@@ -41,7 +38,7 @@ public class UploadController {
      * Date: 2020/4/13 14:25
      */
     @ApiOperation(value = "上传图片",notes="根据上传图片并返回url; author：JQJ")
-    @PostMapping("/image")
+    @PostMapping("/upload")
     public ResponseEntity<String> uploadImage(
             @ApiParam(name = "file", value = "选择上传的图片", required = true)
             @RequestParam("file") MultipartFile file){
@@ -51,6 +48,14 @@ public class UploadController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(url);
+    }
+    @ApiOperation(value = "删除图片",notes="删除上传图片,; author：JQJ")
+    @DeleteMapping("/{filePath}")
+    public ResponseEntity<Void> deleteImage(
+            @ApiParam(name = "filePath", value = "选择删除图片的带分组的路径", required = true)
+            @PathVariable String filePath) {
+        this.uploadService.deleteImage(filePath);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
 

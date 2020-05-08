@@ -104,5 +104,13 @@ public class BlogController {
         return ResponseEntity.ok(blogService.queryBlogCount());
     }
 
+    @ApiOperation(value = "根据博客类型id查询所有的博客信息(不包含博客类型和博客标签)", notes = "可以分页和排序;\nauthor：JQJ")
+    @GetMapping("/all/byTypeId")
+    public ResponseEntity<PageResultDTO<Blog>> queryBlogByType (
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
+            @ApiParam(name = "typeId", value = "博客模糊查询所需数据") @RequestParam(required = false) Integer typeId
+    ) {
+        return ResponseEntity.ok(blogService.queryBlogByType(pageVo, typeId));
+    }
 }
 

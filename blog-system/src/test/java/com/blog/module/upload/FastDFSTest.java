@@ -1,5 +1,6 @@
 package com.blog.module.upload;
 
+import com.blog.module.upload.service.UploadService;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.domain.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -30,6 +31,9 @@ public class FastDFSTest {
     @Autowired
     private ThumbImageConfig thumbImageConfig;
 
+    @Autowired
+    private UploadService uploadService;
+
     @Test
     public void testUpload() throws FileNotFoundException {
         // 要上传的文件
@@ -56,5 +60,11 @@ public class FastDFSTest {
         // 获取缩略图路径
         String path = thumbImageConfig.getThumbImagePath(storePath.getPath());
         System.out.println(path);
+    }
+
+    @Test
+    public void testDeleteImageSrc() {
+        String filePath = "group1/M00/00/00/rBEACF60vAKADvxeAAcm5tUBNvM993.jpg";
+        this.uploadService.deleteImage(filePath);
     }
 }

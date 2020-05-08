@@ -1,5 +1,6 @@
 package com.blog.module.upload.service;
 
+import com.blog.exception.BaseException;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import lombok.extern.java.Log;
@@ -69,5 +70,19 @@ public class UploadService {
             e.printStackTrace();
         }
         return null;
+    }
+    /**
+     * 功能描述： 删除图片
+     *
+     * @param
+     * @author jiaoqianjin
+     * Date: 2020/5/7 21:34
+     */
+    public void deleteImage(String filePath) {
+        if (StringUtils.isEmpty(filePath)) {
+            throw new BaseException("图片路径不能为空");
+        }
+        //执行删除图片
+       this.storageClient.deleteFile(filePath);
     }
 }
