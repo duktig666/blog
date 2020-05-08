@@ -106,4 +106,29 @@ public interface BlogMapper extends CommentMapper<Blog> {
      */
     @Select("SELECT SUM(observe_number) FROM blog")
     Integer queryBlogObserveCount ();
+
+    /**
+     * 功能描述：根据博客标签id查询博客集合
+     *
+     * @param
+     * @return
+     * @author jiaoqianjin
+     * Date: 2020/5/8 20:27
+     */
+    @Select("SELECT l.*,b.* FROM blog_label_middle bl " +
+            "LEFT JOIN blog_label l ON l.id=bl.label_id " +
+            "LEFT JOIN blog b ON b.id=bl.blog_id " +
+            "WHERE bl.label_id = #{labelId}")
+    List<Blog> queryByLabelId(@Param("labelId")Long labelId);
+//    /**
+//     * 功能描述：根据博客标签id集合查询博客id集合
+//     *
+//     * @param labelIds 博客标签id集合
+//     * @return 博客id集合
+//     * @author jiaoqianjin
+//     * Date: 2020/5/8 16:46
+//     */
+//    List<Long> queryBlogIdsByBlogLabelIds(List<Long> labelIds);
+//
+//    List<Blog> queryByBlogIds(List<Long> blogIds);
 }

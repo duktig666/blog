@@ -105,4 +105,15 @@ public interface BlogService {
      * Date: 2020/5/6 9:34
      */
     PageResultDTO<Blog> queryBlogByType (PageVO pageVo, Integer typeId);
+
+    /**
+     * 功能描述：根据博客标签ID集合，查询对应类型博客
+     *
+     *  @param pageVo  分页 排序信息
+     *  @param labelId 博客标签id
+     * @return
+     * @author jiaoqianjin
+     * Date: 2020/5/8 16:30
+     */
+    PageResultDTO<Blog> queryBlogByLabelId(PageVO pageVo, Long labelId);
 }
