@@ -34,26 +34,32 @@ public class Blog  implements Serializable {
     /** 所属博客类型id */
     @Column(name="type_id")
     @ApiModelProperty(value = "所属博客类型id")
-//    @NotNull(message = "所属博客类型id不能为空")
+    @NotNull(message = "所属博客类型id不能为空")
     private Long typeId;
 
     /** 博客标题 */
     @Column(name="title")
     @ApiModelProperty(value = "博客标题")
-//    @NotBlank(message = "博客标题不能为空")
+    @NotBlank(message = "博客标题不能为空")
     private String title;
 
     /** 博客摘要 */
     @Column(name="summary")
     @ApiModelProperty(value = "博客摘要")
-    //    @NotBlank(message = "博客摘要不能为空")
+    @NotBlank(message = "博客摘要不能为空")
     private String summary;
 
     /** 博客正文 */
     @Column(name="content")
     @ApiModelProperty(value = "博客正文")
-//    @NotBlank(message = "博客正文不能为空")
+    @NotBlank(message = "博客正文不能为空")
     private String content;
+
+    /** 博客正文html格式 */
+    @Column(name="content_html")
+    @ApiModelProperty(value = "博客正文html格式")
+    @NotBlank(message = "博客正文html格式不能为空")
+    private String contentHtml;
 
     /** 浏览量 */
     @Column(name="visit_number")

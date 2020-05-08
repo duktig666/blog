@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 2020/5/7 18:20
  **/
 @Data
-public class BlogInsertVO {
+public class BlogAndLabelVO {
 
     private Blog blog;
 

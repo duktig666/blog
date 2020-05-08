@@ -4,7 +4,7 @@ import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.bo.BlogBO;
 import com.blog.module.business.service.BlogService;
 import com.blog.module.business.service.dto.BlogCountDTO;
-import com.blog.module.business.domain.vo.BlogInsertVO;
+import com.blog.module.business.domain.vo.BlogAndLabelVO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 import io.swagger.annotations.Api;
@@ -36,10 +36,9 @@ public class BlogController {
     @ApiOperation(value = "新增博客", notes = "新增一条博客信息;\nauthor：RSW")
     @PostMapping
     public ResponseEntity<Void> saveBlogType (
-            @ApiParam(name = "blog", value = "新增的博客信息", required = true) @RequestBody BlogInsertVO blogInsertVO
+            @ApiParam(name = "blog", value = "新增的博客信息", required = true) @RequestBody  @Validated BlogAndLabelVO blogAndLabelVO
     ) {
-        System.out.println(blogInsertVO + "------");
-        blogService.saveBlog(blogInsertVO.getBlog(), blogInsertVO.getBlogLabelIds());
+        blogService.saveBlog(blogAndLabelVO.getBlog(), blogAndLabelVO.getBlogLabelIds());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -64,11 +63,9 @@ public class BlogController {
     @ApiOperation(value = "修改博客信息", notes = "修改博客信息（并维护中间表，先删除，在新增）;\nauthor：RSW")
     @PutMapping
     public ResponseEntity<Void> updateBlog (
-            @ApiParam(name = "blog", value = "修改的博客信息", required = true) @Validated(Blog.UpdateGroup.class) Blog blog,
-            @ApiParam(name = "blogLabelIds", value = "修改博客对应的博客标签集合", required = true)
-            @RequestParam List<Long> blogLabelIds
+            @ApiParam(name = "blog", value = "修改的博客信息", required = true) @RequestBody @Validated(Blog.UpdateGroup.class) BlogAndLabelVO blogAndLabelVO
     ) {
-        blogService.updateBlog(blog, blogLabelIds);
+        blogService.updateBlog(blogAndLabelVO.getBlog(), blogAndLabelVO.getBlogLabelIds());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

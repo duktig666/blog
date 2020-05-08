@@ -32,7 +32,7 @@ public class UploadService {
     @Autowired
     private FastFileStorageClient storageClient;
 
-    private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/gif");
+    private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/gif","image/jpg","image/png");
 
     /**
      *  图片上传
@@ -64,7 +64,7 @@ public class UploadService {
             StorePath storePath = this.storageClient.uploadFile(file.getInputStream(), file.getSize(), ext, null);
 
             // 生成url地址，返回
-            return "http://118.89.143.27/" + storePath.getFullPath();
+            return "http://118.89.143.27:8888/" + storePath.getFullPath();
         } catch (IOException e) {
             log.info("服务器内部错误：{}", originalFilename);
             e.printStackTrace();
