@@ -50,10 +50,10 @@ public class LeaveWordController {
     }
 
     @ApiOperation(value = "批量删除留言信息",notes="根据留言id集合批量删除留言信息; \n author：JQJ")
-    @DeleteMapping("/ids")
+    @PostMapping("/ids")
     public ResponseEntity<Void> deleteLeaveWords (
             @ApiParam(name = "leaveWordIds", value = "留言id集合",required = true)
-            @RequestParam("leaveWordIds") List<Long> leaveWordIds ){
+            @RequestBody List<Long> leaveWordIds ){
         this.leaveWordService.deleteLeaveWords(leaveWordIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
