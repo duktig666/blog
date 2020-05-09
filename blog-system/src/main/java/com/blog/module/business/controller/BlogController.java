@@ -90,7 +90,8 @@ public class BlogController {
     @GetMapping("/all/single")
     public ResponseEntity<PageResultDTO<Blog>> queryBlogAll (
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
-            @ApiParam(name = "blogDimSearchStr", value = "博客模糊查询所需数据") @RequestParam(required = false) String blogDimSearchStr
+            @ApiParam(name = "blogDimSearchStr", value = "博客模糊查询所需数据")
+            @RequestParam(required = false) String blogDimSearchStr
     ) {
         return ResponseEntity.ok(blogService.queryBlogAll(pageVo, blogDimSearchStr));
     }
@@ -101,13 +102,24 @@ public class BlogController {
         return ResponseEntity.ok(blogService.queryBlogCount());
     }
 
-    @ApiOperation(value = "根据博客类型id查询所有的博客信息(不包含博客类型和博客标签)", notes = "可以分页和排序;\nauthor：JQJ")
+    @ApiOperation(value = "根据博客类型id查询所有的博客信息", notes = "可以分页和排序;\nauthor：JQJ")
     @GetMapping("/all/byTypeId")
     public ResponseEntity<PageResultDTO<Blog>> queryBlogByType (
             @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
-            @ApiParam(name = "typeId", value = "博客模糊查询所需数据") @RequestParam(required = false) Integer typeId
+            @ApiParam(name = "typeId", value = "博客类型ID")
+            @RequestParam(required = false) Integer typeId
     ) {
         return ResponseEntity.ok(blogService.queryBlogByType(pageVo, typeId));
+    }
+
+    @ApiOperation(value = "根据博客标签id查询所有的博客信息", notes = "可以分页和排序;\nauthor：JQJ")
+    @GetMapping("/all/buLabelIds")
+    public ResponseEntity<PageResultDTO<Blog>> queryBlogByLabelIds (
+            @ApiParam(name = "pageVo", value = "分页信息") PageVO pageVo,
+            @ApiParam(name = "labelId", value = "博客标签ID")
+            @RequestParam("labelId") Long labelId
+    ) {
+        return ResponseEntity.ok(blogService.queryBlogByLabelId(pageVo, labelId));
     }
 }
 
