@@ -4,6 +4,7 @@ import com.blog.exception.BaseException;
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
+import com.blog.module.business.domain.bo.ObserveUserBo;
 import com.blog.module.business.mapper.ObserveMapper;
 import com.blog.module.business.mapper.UserMapper;
 import com.blog.module.business.service.ObserveService;
@@ -31,24 +32,24 @@ public class ObserveServiceImpl implements ObserveService {
     /**
      * 功能描述：新增博客评论
      *
-     * @param user 游客信息
+     * @param user    游客信息
      * @param observe 评论信息
      * @author RenShiWei
      * Date: 2020/4/15 8:24
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveObserve (User user, Observe observe ) {
-        //新增评论信息
-        int count=observeMapper.insertSelective(observe);
-        if (count == 0) {
-            throw new BaseException("新增评论信息失败！");
-        }
+    public void saveObserve ( User user, Observe observe ) {
         //新增游客信息
-        observe.setObserverId(user.getId());
-        count= userMapper.insertSelective(user);
+        int count = userMapper.insertSelective(user);
         if (count == 0) {
             throw new BaseException("新增评论信息失败(游客信息增加失败)！");
+        }
+        //新增评论信息
+        observe.setObserverId(user.getId());
+        count = observeMapper.insertSelective(observe);
+        if (count == 0) {
+            throw new BaseException("新增评论信息失败！");
         }
     }
 
@@ -95,12 +96,12 @@ public class ObserveServiceImpl implements ObserveService {
     @Override
     public List<ObserveNodeBO> queryObserveByBlogId ( Long blogId ) {
         //所有未处理的一级评论集合
-        List<ObserveNodeBO> firstObserveList=observeMapper.queryFirstObserveList(blogId);
-       //所有未处理的二级评论集合
-        List<ObserveNodeBO> secondObserveList=observeMapper.querySecondObserveList(blogId);
+        List<ObserveNodeBO> firstObserveList = observeMapper.queryFirstObserveList(blogId);
+        //所有未处理的二级评论集合
+        List<ObserveNodeBO> secondObserveList = observeMapper.querySecondObserveList(blogId);
 
         //将二级评论用链表的方式添加到一级评论
-        List<ObserveNodeBO> list=addAllNode(firstObserveList,secondObserveList);
+        List<ObserveNodeBO> list = addAllNode(firstObserveList, secondObserveList);
 
         //控制台打印评论回复
         show(list);
@@ -109,7 +110,23 @@ public class ObserveServiceImpl implements ObserveService {
         return list;
     }
 
-
+    /**
+     * 功能描述：根据评论id查询用户信息
+     *
+     * @param observeId 评论id
+     * @return 评论信息，携带用户信息
+     * @author RenShiWei
+     * Date: 2020/5/9 18:42
+     */
+    @Override
+    public ObserveUserBo queryObserveUserById ( Long observeId ) {
+        Observe observe=observeMapper.selectByPrimaryKey(observeId);
+        User user=userMapper.selectByPrimaryKey(observe.getObserverId());
+        ObserveUserBo observeUserBo=new ObserveUserBo();
+        observeUserBo.setObserve(observe);
+        observeUserBo.setUser(user);
+        return observeUserBo;
+    }
 
 
     /**
@@ -128,7 +145,6 @@ public class ObserveServiceImpl implements ObserveService {
             if (node.getId().equals(observeNode.getLastId())) {
                 //是，添加，返回true
                 node.getNextNodes().add(observeNode);
-                System.out.println("添加了一个");
                 return true;
             } else {
                 //否则递归继续判断
@@ -174,7 +190,7 @@ public class ObserveServiceImpl implements ObserveService {
      */
     private void show ( List<ObserveNodeBO> list ) {
         for (ObserveNodeBO node : list) {
-            System.out.println(node.getObserverId() + " 用户回复了"+node.getLastId()+"：" + node.getObserveContent());
+            System.out.println(node.getObserverId() + " 用户回复了" + node.getLastId() + "：" + node.getObserveContent());
             //递归打印回复信息
             if (node.getNextNodes().size() != 0) {
                 show(node.getNextNodes());

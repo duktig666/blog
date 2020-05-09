@@ -41,7 +41,7 @@ public class Observe implements Serializable {
     /** 评论者id */
     @Column(name="observer_id")
     @ApiModelProperty(value = "评论者id")
-    @NotNull(message = "评论者id不能为空")
+    @NotNull(groups = UpdateGroup.class,message = "评论者id不能为空")
     private Long observerId;
 
     /** 评论内容 */

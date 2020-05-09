@@ -3,6 +3,7 @@ package com.blog.module.business.service;
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
+import com.blog.module.business.domain.bo.ObserveUserBo;
 
 import java.util.List;
 
@@ -50,4 +51,13 @@ public interface ObserveService {
      * Date: 2020/4/15 8:29
      */
     List<ObserveNodeBO> queryObserveByBlogId( Long blogId);
+
+    /**
+     * 功能描述：根据评论id查询用户信息
+     * @param observeId 评论id
+     * @return 评论信息，携带用户信息
+     * @author RenShiWei
+     * Date: 2020/5/9 18:42
+     */
+    ObserveUserBo queryObserveUserById(Long observeId);
 }

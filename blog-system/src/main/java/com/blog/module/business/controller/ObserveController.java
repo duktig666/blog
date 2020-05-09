@@ -3,6 +3,7 @@ package com.blog.module.business.controller;
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
+import com.blog.module.business.domain.bo.ObserveUserBo;
 import com.blog.module.business.service.ObserveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -64,6 +65,14 @@ public class ObserveController {
             @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
     ) {
         return ResponseEntity.ok(observeService.queryObserveByBlogId(blogId));
+    }
+
+    @ApiOperation(value = "根据评论id查询用户信息", notes = "评论信息，携带用户信息;\nauthor：RSW")
+    @GetMapping("/user/{observeId}")
+    public ResponseEntity<ObserveUserBo> queryObserveUserById (
+            @ApiParam(name = "observeId", value = "评论id", required = true)@Valid @PathVariable Long observeId
+    ) {
+        return ResponseEntity.ok(observeService.queryObserveUserById(observeId));
     }
 }
 
