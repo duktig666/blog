@@ -4,7 +4,9 @@ import com.blog.exception.BaseException;
 import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.BlogLabel;
 import com.blog.module.business.domain.BlogType;
+import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.bo.BlogBO;
+import com.blog.module.business.mapper.ObserveMapper;
 import com.blog.module.business.service.dto.BlogCountDTO;
 import com.blog.module.business.mapper.BlogLabelMapper;
 import com.blog.module.business.mapper.BlogMapper;
@@ -41,6 +43,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogLabelMapper blogLabelMapper;
+
+    @Autowired
+    private ObserveMapper observeMapper;
 
     /**
      * 功能描述：新增博客（需要维护中间表）
@@ -85,6 +90,23 @@ public class BlogServiceImpl implements BlogService {
         if (count == 0) {
             throw new BaseException("删除博客的博客标签失败，导致博客删除失败");
         }
+        //删除博客的时候也删除这篇博客的评论信息
+        deleteObserveByBlogId(blogId);
+    }
+
+    /**
+     * 功能描述：根据博客id，删除此篇博客的所有评论信息
+     * 主要用于删除博客时，删除对应的评论信息
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/11 10:00
+     */
+    private void deleteObserveByBlogId ( Long blogId ) {
+        Example example = new Example(Observe.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("blogId", blogId);
+        observeMapper.deleteByExample(example);
     }
 
     /**
@@ -106,6 +128,10 @@ public class BlogServiceImpl implements BlogService {
         count = blogMapper.deleteBlogLabelMiddleByBlogIds(blogIds);
         if (count == 0) {
             throw new BaseException("批量删除博客的博客标签失败，导致博客删除失败");
+        }
+        //批量删除博客的时候也删除这篇博客的评论信息
+        for (Long blogId : blogIds) {
+            deleteObserveByBlogId(blogId);
         }
     }
 
@@ -249,13 +275,14 @@ public class BlogServiceImpl implements BlogService {
 
     /**
      * 功能描述：查询博客的总访问量、点赞量、评论量
+     *
      * @return 博客的总访问量、点赞量、评论量的DTO
      * @author RenShiWei
      * Date: 2020/5/5 12:14
      */
     @Override
     public BlogCountDTO queryBlogCount () {
-        BlogCountDTO blogCountDTO =new BlogCountDTO();
+        BlogCountDTO blogCountDTO = new BlogCountDTO();
         blogCountDTO.setVisitNumbers(blogMapper.queryBlogVisitCount());
         blogCountDTO.setLikeNumber(blogMapper.queryBlogLikeCount());
         blogCountDTO.setObserveNumber(blogMapper.queryBlogObserveCount());
@@ -272,7 +299,7 @@ public class BlogServiceImpl implements BlogService {
      * Date: 2020/5/6 9:34
      */
     @Override
-    public PageResultDTO<Blog> queryBlogByType(PageVO pageVo, Integer typeId) {
+    public PageResultDTO<Blog> queryBlogByType ( PageVO pageVo, Integer typeId ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
@@ -280,7 +307,7 @@ public class BlogServiceImpl implements BlogService {
         // 初始化example对象
         Example example = new Example(Blog.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("typeId",typeId);
+        criteria.andEqualTo("typeId", typeId);
         List<Blog> blogs = this.blogMapper.selectByExample(example);
         System.out.println(blogs);
         if (CollectionUtils.isEmpty(blogs)) {
@@ -295,14 +322,14 @@ public class BlogServiceImpl implements BlogService {
     /**
      * 功能描述：根据博客标签ID，查询对应类型博客
      *
-     * @param pageVo   分页 排序信息
+     * @param pageVo  分页 排序信息
      * @param labelId 博客标签id集合
      * @return
      * @author jiaoqianjin
      * Date: 2020/5/8 16:30
      */
     @Override
-    public PageResultDTO<Blog> queryBlogByLabelId(PageVO pageVo, Long labelId) {
+    public PageResultDTO<Blog> queryBlogByLabelId ( PageVO pageVo, Long labelId ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
