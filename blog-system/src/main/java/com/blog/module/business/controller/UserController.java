@@ -49,10 +49,10 @@ public class UserController {
 
     @ApiOperation(value = "批量删除用户信息",notes="根据用户id集合批量删除用户信息; \n author：JQJ")
     @ApiParam(name = "visitorIds", value = "用户id集合", required = true)
-    @DeleteMapping("/ids")
+    @PostMapping("/ids")
     public ResponseEntity<Void> deleteVisitors (
             @ApiParam(name = "visitorIds", value = "用户id集合", required = true)
-            @Valid @RequestParam List<Long> visitorIds ){
+           @RequestBody List<Long> visitorIds ){
         this.userService.deleteVisitors(visitorIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

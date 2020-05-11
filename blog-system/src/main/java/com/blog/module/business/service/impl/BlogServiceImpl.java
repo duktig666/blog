@@ -23,7 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -196,7 +198,7 @@ public class BlogServiceImpl implements BlogService {
      * Date: 2020/4/14 21:08
      */
     @Override
-    public PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr ) {
+    public PageResultDTO<BlogBO> queryBlogList (PageVO pageVo, String blogDimSearchStr, Timestamp blogDateStart, Timestamp blogDateEnd ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
@@ -207,11 +209,11 @@ public class BlogServiceImpl implements BlogService {
         // 初始化example对象
         Example example = new Example(Blog.class);
         Example.Criteria criteria = example.createCriteria();
+        // 根据时间区间查询博客
+        criteria.andBetween("createDate",blogDateStart,blogDateEnd);
         //判断是否需要模糊查询
         if (StringUtils.isNotEmpty(blogDimSearchStr)) {
-            criteria.orLike("title", "%" + blogDimSearchStr + "%")
-                    .orLike("summary", "%" + blogDimSearchStr + "%")
-                    .orLike("content", "%" + blogDimSearchStr + "%");
+            criteria.andLike("title", "%" + blogDimSearchStr + "%");
         }
         // 封装BlogBO
         List<BlogBO> blogBOS = new ArrayList<>();
@@ -341,7 +343,7 @@ public class BlogServiceImpl implements BlogService {
 //        List<Blog> blogs = this.blogMapper.queryByBlogIds(blogIds);
         List<Blog> blogs = this.blogMapper.queryByLabelId(labelId);
         if (CollectionUtils.isEmpty(blogs)) {
-            throw new BaseException("暂无类型博客信息！");
+            throw new BaseException("暂无标签博客信息！");
         }
         //查询结果转换为PageInfo对象
         PageInfo<Blog> boPageInfo = new PageInfo<>(blogs);
