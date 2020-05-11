@@ -152,9 +152,9 @@ public class LeaveWordServiceImpl implements LeaveWordService {
             throw new BaseException(HttpStatus.NOT_FOUND,"查询留言信息失败！");
         }
         //分页处理
-        PageInfo<LeaveWordBO> pageInfo = new PageInfo<>(leaveWordBOS);
+        PageInfo<LeaveWord> pageInfo = new PageInfo<>(leaveWords);
         //返回封装的分页结果集
-        return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getList());
+        return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), leaveWordBOS);
     }
 
     /**

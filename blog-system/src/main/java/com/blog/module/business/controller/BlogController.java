@@ -52,10 +52,10 @@ public class BlogController {
     }
 
     @ApiOperation(value = "批量删除博客", notes = "根据博客id集合，批量删除博客（并维护中间表）;\nauthor：RSW")
-    @DeleteMapping("/ids")
+    @PostMapping("/ids")
     public ResponseEntity<Void> deleteBlogs (
             @ApiParam(name = "blogIds", value = "博客id集合", required = true)
-            @Valid @RequestParam("blogIds") List<Long> blogIds ) {
+            @RequestBody List<Long> blogIds ) {
         blogService.deleteBlogs(blogIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

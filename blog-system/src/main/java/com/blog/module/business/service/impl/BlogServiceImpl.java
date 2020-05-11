@@ -121,6 +121,7 @@ public class BlogServiceImpl implements BlogService {
     public void deleteBlogs ( List<Long> blogIds ) {
         //批量删除博客
         int count = blogMapper.deleteByIdList(blogIds);
+        System.out.println(blogIds+"-=======-");
         if (count == 0) {
             throw new BaseException("批量删除博客失败");
         }
@@ -231,9 +232,9 @@ public class BlogServiceImpl implements BlogService {
             blogBOS.add(blogBO);
         });
         //查询结果转换为PageInfo对象
-        PageInfo<BlogBO> boPageInfo = new PageInfo<>(blogBOS);
+        PageInfo<Blog> boPageInfo = new PageInfo<>(blogs);
         //返回封装的分页结果集
-        return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
+        return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), blogBOS);
     }
 
     /**

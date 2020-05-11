@@ -1,16 +1,19 @@
 package com.blog.module.business.service.impl;
 
 import com.blog.exception.BaseException;
+import com.blog.module.business.domain.Blog;
 import com.blog.module.business.domain.Observe;
 import com.blog.module.business.domain.User;
 import com.blog.module.business.domain.bo.ObserveNodeBO;
 import com.blog.module.business.domain.bo.ObserveUserBo;
+import com.blog.module.business.mapper.BlogMapper;
 import com.blog.module.business.mapper.ObserveMapper;
 import com.blog.module.business.mapper.UserMapper;
 import com.blog.module.business.service.ObserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -28,6 +31,9 @@ public class ObserveServiceImpl implements ObserveService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private BlogMapper blogMapper;
 
     /**
      * 功能描述：新增博客评论
@@ -50,6 +56,24 @@ public class ObserveServiceImpl implements ObserveService {
         count = observeMapper.insertSelective(observe);
         if (count == 0) {
             throw new BaseException("新增评论信息失败！");
+        }
+        //维护博客的评论量
+        insertObserveCount(observe.getBlogId());
+    }
+
+    /**
+     * 功能描述：新增评论，同时维护博客的评论量
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/11 10:45
+     */
+    private void insertObserveCount ( Long blogId ) {
+        Blog blog = blogMapper.selectByPrimaryKey(blogId);
+        blog.setObserveNumber(blog.getObserveNumber() + 1);
+        int count = blogMapper.updateByPrimaryKeySelective(blog);
+        if (count == 0) {
+            throw new BaseException("维护博客的回复量失败！");
         }
     }
 
@@ -120,9 +144,9 @@ public class ObserveServiceImpl implements ObserveService {
      */
     @Override
     public ObserveUserBo queryObserveUserById ( Long observeId ) {
-        Observe observe=observeMapper.selectByPrimaryKey(observeId);
-        User user=userMapper.selectByPrimaryKey(observe.getObserverId());
-        ObserveUserBo observeUserBo=new ObserveUserBo();
+        Observe observe = observeMapper.selectByPrimaryKey(observeId);
+        User user = userMapper.selectByPrimaryKey(observe.getObserverId());
+        ObserveUserBo observeUserBo = new ObserveUserBo();
         observeUserBo.setObserve(observe);
         observeUserBo.setUser(user);
         return observeUserBo;
