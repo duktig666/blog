@@ -13,7 +13,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://118.89.143.27:3306/blog_system?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://118.89.143.27:3306/blog_system?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
 
     username: root
     password: 159357asd

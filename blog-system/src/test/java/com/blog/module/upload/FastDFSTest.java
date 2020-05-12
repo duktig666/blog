@@ -64,7 +64,7 @@ public class FastDFSTest {
 
     @Test
     public void testDeleteImageSrc() {
-        String filePath = "group1/M00/00/00/rBEACF60vAKADvxeAAcm5tUBNvM993.jpg";
+        String filePath = "group1/M00/00/00/rBEACF66CDCACyF7AAjOQvwcHRA688.png";
         this.uploadService.deleteImage(filePath);
     }
 }

@@ -50,10 +50,11 @@ public class UploadController {
         return ResponseEntity.status(HttpStatus.CREATED).body(url);
     }
     @ApiOperation(value = "删除图片",notes="删除上传图片,; author：JQJ")
-    @DeleteMapping("/{filePath}")
+    @DeleteMapping("/")
     public ResponseEntity<Void> deleteImage(
             @ApiParam(name = "filePath", value = "选择删除图片的带分组的路径", required = true)
-            @PathVariable String filePath) {
+            @RequestParam("filePath") String filePath) {
+        System.out.println(filePath);
         this.uploadService.deleteImage(filePath);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
