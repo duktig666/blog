@@ -72,6 +72,16 @@ public class User implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Timestamp updateDate;
 
+    /** 账号 */
+    @Column(name="account")
+    @ApiModelProperty(value = "账号")
+    private String account;
+
+    /** 密码 */
+    @Column(name="password")
+    @ApiModelProperty(value = "密码")
+    private String password;
+
     public interface UpdateGroup {
     }
 }

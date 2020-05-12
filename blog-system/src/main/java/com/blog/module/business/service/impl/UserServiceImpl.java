@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:42
      */
     @Override
-    public void saveVisitor(User user) {
+    public void saveVisitor ( User user ) {
         int res = this.userMapper.insertSelective(user);
         if (res == 0) {
             throw new BaseException("新增用户信息失败！");
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:43
      */
     @Override
-    public void deleteVisitor(Long visitorId) {
+    public void deleteVisitor ( Long visitorId ) {
         int res = this.userMapper.deleteByPrimaryKey(visitorId);
         if (res == 0) {
             throw new BaseException("删除用户信息失败！");
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:43
      */
     @Override
-    public void deleteVisitors(List<Long> visitorIds) {
+    public void deleteVisitors ( List<Long> visitorIds ) {
         if (CollectionUtil.isEmpty(visitorIds)) {
             throw new BaseException(HttpStatus.NOT_FOUND, "传入所需要删除的ID集合不能为空");
         }
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:44
      */
     @Override
-    public void updateVisitor(User user) {
+    public void updateVisitor ( User user ) {
         int res = this.userMapper.updateByPrimaryKeySelective(user);
         if (res == 0) {
             throw new BaseException("修改用户信息失败！");
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:45
      */
     @Override
-    public User queryVisitor(Long visitorId) {
+    public User queryVisitor ( Long visitorId ) {
         User user = this.userMapper.selectByPrimaryKey(visitorId);
         if (user == null) {
             throw new BaseException("暂无此用户信息！");
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
      * Date: 2020/4/13 20:46
      */
     @Override
-    public PageResultDTO<User> queryVisitorAll(int identity,PageVO pageVo) {
+    public PageResultDTO<User> queryVisitorAll ( int identity, PageVO pageVo ) {
         // 分页 排序 查询条件
         System.out.println(pageVo.getCurrentPage());
         PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
@@ -136,7 +136,26 @@ public class UserServiceImpl implements UserService {
         //分页处理
         PageInfo<User> pageInfo = new PageInfo<>(users);
         //返回封装的分页结果集
-        return new PageResultDTO<>(pageInfo.getTotal(),pageInfo.getPageSize(),pageInfo.getList());
+        return new PageResultDTO<>(pageInfo.getTotal(), pageInfo.getPageSize(), pageInfo.getList());
+    }
+
+    /**
+     * 功能描述：用户登录的账号、密码验证
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return 是否登录成功
+     * @author RenShiWei
+     * Date: 2020/5/12 8:55
+     */
+    @Override
+    public boolean login ( String account, String password ) {
+        User user = new User();
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setIdentity(1);
+        int count = userMapper.selectCount(user);
+        return count == 1;
     }
 
 }

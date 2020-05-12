@@ -15,39 +15,39 @@ import java.util.List;
 public interface UserService {
     /**
      * 功能描述：增加一位用户的信息
-     * 
-     * @param user
+     *
+     * @param user 用户信息
      * @author jiaoqianjin
      * Date: 2020/4/13 20:42
      */
-    void saveVisitor (User user);
-    
+    void saveVisitor ( User user );
+
     /**
      * 功能描述：根据用户id ,删除对应的用户信息
-     * 
+     *
      * @param visitorId
      * @author jiaoqianjin
      * Date: 2020/4/13 20:43
      */
-    void deleteVisitor (Long visitorId);
-    
+    void deleteVisitor ( Long visitorId );
+
     /**
      * 功能描述：批量删除用户信息
-     * 
+     *
      * @param visitorIds
      * @author jiaoqianjin
      * Date: 2020/4/13 20:43
      */
-    void deleteVisitors (List<Long> visitorIds);
-    
+    void deleteVisitors ( List<Long> visitorIds );
+
     /**
      * 功能描述：根据传入的用户信息,进行更新操作
-     * 
+     *
      * @param user
      * @author jiaoqianjin
      * Date: 2020/4/13 20:44
      */
-    void updateVisitor (User user);
+    void updateVisitor ( User user );
 
     /**
      * 功能描述：根据用户id,查询对应的用户信息
@@ -57,7 +57,7 @@ public interface UserService {
      * @author jiaoqianjin
      * Date: 2020/4/13 20:45
      */
-    User queryVisitor (Long visitorId);
+    User queryVisitor ( Long visitorId );
 
     /**
      * 功能描述：根据传入的分页排序信息，查询对应游客
@@ -67,5 +67,16 @@ public interface UserService {
      * @author jiaoqianjin
      * Date: 2020/4/13 20:46
      */
-    PageResultDTO<User> queryVisitorAll (int identity,PageVO pageVo);
+    PageResultDTO<User> queryVisitorAll ( int identity, PageVO pageVo );
+
+    /**
+     * 功能描述：用户登录的账号、密码验证
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return 是否登录成功
+     * @author RenShiWei
+     * Date: 2020/5/12 8:55
+     */
+    boolean login ( String account, String password );
 }
