@@ -6,6 +6,7 @@ import com.blog.module.business.service.dto.BlogCountDTO;
 import com.blog.page.dto.PageResultDTO;
 import com.blog.page.vo.PageVO;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -73,7 +74,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/4/14 21:08
      */
-    PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr );
+    PageResultDTO<BlogBO> queryBlogList (PageVO pageVo, String blogDimSearchStr , Timestamp blogDateStart, Timestamp blogDateEnd);
 
     /**
      * 功能描述：查询所有的博客信息(不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询))
@@ -84,7 +85,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/5/5 20:40
      */
-    PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr );
+    PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr);
 
     /**
      * 功能描述：查询博客的总访问量、点赞量、评论量
