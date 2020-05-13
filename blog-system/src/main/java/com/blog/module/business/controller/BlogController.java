@@ -140,5 +140,25 @@ public class BlogController {
     ) {
         return ResponseEntity.ok(blogService.queryBlogByLabelId(pageVo, labelId));
     }
+
+    @ApiOperation(value = "增加博客的浏览量", notes = "增加博客的浏览量;\nauthor：RSW")
+    @PutMapping("/increase-view-number/{blogId}")
+    public ResponseEntity<Void> increaseViewCount (
+            @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
+    ) {
+        blogService.increaseViewCount(blogId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "增加博客的点赞量", notes = "增加博客的点赞量;\nauthor：RSW")
+    @PutMapping("/increase-like-number/{blogId}")
+    public ResponseEntity<Void> increaseLikeCount (
+            @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
+    ) {
+        blogService.increaseLikeCount(blogId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
 }
 

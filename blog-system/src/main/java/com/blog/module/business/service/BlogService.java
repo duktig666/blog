@@ -74,7 +74,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/4/14 21:08
      */
-    PageResultDTO<BlogBO> queryBlogList (PageVO pageVo, String blogDimSearchStr , Timestamp blogDateStart, Timestamp blogDateEnd);
+    PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr, Timestamp blogDateStart, Timestamp blogDateEnd );
 
     /**
      * 功能描述：查询所有的博客信息(不包含博客类型和博客标签（可以分页和排序,可以根据博客标题、博客正文、博客摘要进行模糊查询))
@@ -85,7 +85,7 @@ public interface BlogService {
      * @author RenShiWei
      * Date: 2020/5/5 20:40
      */
-    PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr);
+    PageResultDTO<Blog> queryBlogAll ( PageVO pageVo, String blogDimSearchStr );
 
     /**
      * 功能描述：查询博客的总访问量、点赞量、评论量
@@ -99,22 +99,40 @@ public interface BlogService {
     /**
      * 功能描述：根据博客类型ID，查询对应类型博客
      *
-     * @param pageVo  分页 排序信息
+     * @param pageVo 分页 排序信息
      * @param typeId 博客类型id
      * @return 博客信息集合
      * @author jiaoqianjin
      * Date: 2020/5/6 9:34
      */
-    PageResultDTO<Blog> queryBlogByType (PageVO pageVo, Integer typeId);
+    PageResultDTO<Blog> queryBlogByType ( PageVO pageVo, Integer typeId );
 
     /**
      * 功能描述：根据博客标签ID集合，查询对应类型博客
      *
-     *  @param pageVo  分页 排序信息
-     *  @param labelId 博客标签id
+     * @param pageVo  分页 排序信息
+     * @param labelId 博客标签id
      * @return
      * @author jiaoqianjin
      * Date: 2020/5/8 16:30
      */
-    PageResultDTO<Blog> queryBlogByLabelId(PageVO pageVo, Long labelId);
+    PageResultDTO<Blog> queryBlogByLabelId ( PageVO pageVo, Long labelId );
+
+    /**
+     * 功能描述：增加博客的浏览量
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/12 21:15
+     */
+    void increaseViewCount ( Long blogId );
+
+    /**
+     * 功能描述：增加博客的点赞量
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/12 21:15
+     */
+    void increaseLikeCount ( Long blogId );
 }

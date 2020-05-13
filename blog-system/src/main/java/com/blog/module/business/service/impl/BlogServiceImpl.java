@@ -123,7 +123,7 @@ public class BlogServiceImpl implements BlogService {
     public void deleteBlogs ( List<Long> blogIds ) {
         //批量删除博客
         int count = blogMapper.deleteByIdList(blogIds);
-        System.out.println(blogIds+"-=======-");
+        System.out.println(blogIds + "-=======-");
         if (count == 0) {
             throw new BaseException("批量删除博客失败");
         }
@@ -198,7 +198,7 @@ public class BlogServiceImpl implements BlogService {
      * Date: 2020/4/14 21:08
      */
     @Override
-    public PageResultDTO<BlogBO> queryBlogList (PageVO pageVo, String blogDimSearchStr, Timestamp blogDateStart, Timestamp blogDateEnd ) {
+    public PageResultDTO<BlogBO> queryBlogList ( PageVO pageVo, String blogDimSearchStr, Timestamp blogDateStart, Timestamp blogDateEnd ) {
         //判断是否需要分页和排序
         if (pageVo != null) {
             PageHelper.startPage(pageVo.getCurrentPage(), pageVo.getRows(), pageVo.getSort());
@@ -210,7 +210,7 @@ public class BlogServiceImpl implements BlogService {
         Example example = new Example(Blog.class);
         Example.Criteria criteria = example.createCriteria();
         // 根据时间区间查询博客
-        criteria.andBetween("createDate",blogDateStart,blogDateEnd);
+        criteria.andBetween("createDate", blogDateStart, blogDateEnd);
         //判断是否需要模糊查询
         if (StringUtils.isNotEmpty(blogDimSearchStr)) {
             criteria.andLike("title", "%" + blogDimSearchStr + "%");
@@ -349,6 +349,52 @@ public class BlogServiceImpl implements BlogService {
         PageInfo<Blog> boPageInfo = new PageInfo<>(blogs);
         //返回封装的分页结果集
         return new PageResultDTO<>(boPageInfo.getTotal(), boPageInfo.getPageSize(), boPageInfo.getList());
+    }
+
+    /**
+     * 功能描述：增加博客的浏览量
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/12 21:15
+     */
+    @Override
+    public void increaseViewCount ( Long blogId ) {
+        Blog blog = queryBlogById(blogId);
+        blog.setVisitNumber(blog.getVisitNumber() + 1);
+        int count = blogMapper.updateByPrimaryKeySelective(blog);
+        if (count == 0) {
+            throw new BaseException("增加博客的浏览量失败！");
+        }
+    }
+
+    /**
+     * 功能描述：增加博客的点赞量
+     *
+     * @param blogId 博客id
+     * @author RenShiWei
+     * Date: 2020/5/12 21:15
+     */
+    @Override
+    public void increaseLikeCount ( Long blogId ) {
+        Blog blog = queryBlogById(blogId);
+        blog.setLikeNumber(blog.getLikeNumber() + 1);
+        int count = blogMapper.updateByPrimaryKeySelective(blog);
+        if (count == 0) {
+            throw new BaseException("增加博客的点赞量失败！");
+        }
+    }
+
+    /**
+     * 功能描述：根据博客id，查询一条博客的信息（只不包含博客的信息）
+     *
+     * @param blogId 博客id
+     * @return 一条博客信息
+     * @author RenShiWei
+     * Date: 2020/5/12 21:18
+     */
+    private Blog queryBlogById ( Long blogId ) {
+        return blogMapper.selectByPrimaryKey(blogId);
     }
 
 }
