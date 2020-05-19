@@ -50,8 +50,7 @@ public class BlogController {
     @ApiOperation(value = "删除一条博客", notes = "根据博客id，删除一条博客（并维护中间表）;\nauthor：RSW")
     @DeleteMapping("/{blogId}")
     public ResponseEntity<Void> deleteBlog (
-            @ApiParam(name = "blogId", value = "博客id", required = true)
-            @Valid @PathVariable Long blogId ) {
+            @ApiParam(name = "blogId", value = "博客id", required = true) @PathVariable Long blogId ) {
         blogService.deleteBlog(blogId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -59,8 +58,7 @@ public class BlogController {
     @ApiOperation(value = "批量删除博客", notes = "根据博客id集合，批量删除博客（并维护中间表）;\nauthor：RSW")
     @PostMapping("/ids")
     public ResponseEntity<Void> deleteBlogs (
-            @ApiParam(name = "blogIds", value = "博客id集合", required = true)
-            @RequestBody List<Long> blogIds ) {
+            @ApiParam(name = "blogIds", value = "博客id集合", required = true) @RequestBody List<Long> blogIds ) {
         blogService.deleteBlogs(blogIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -77,8 +75,7 @@ public class BlogController {
     @ApiOperation(value = "查询一条博客信息", notes = "根据博客id，查询一条博客的详细信息（包含博客类型和博客标签）;\nauthor：RSW")
     @GetMapping("/{blogId}")
     public ResponseEntity<BlogBO> queryBlogById (
-            @ApiParam(name = "blogId", value = "博客标签id", required = true)
-            @Valid @PathVariable Long blogId ) {
+            @ApiParam(name = "blogId", value = "博客标签id", required = true) @PathVariable Long blogId ) {
         return ResponseEntity.ok(blogService.queryBlogByBlogId(blogId));
     }
 
@@ -144,7 +141,7 @@ public class BlogController {
     @ApiOperation(value = "增加博客的浏览量", notes = "增加博客的浏览量;\nauthor：RSW")
     @PutMapping("/increase-view-number/{blogId}")
     public ResponseEntity<Void> increaseViewCount (
-            @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
+            @ApiParam(name = "blogId", value = "博客id", required = true) @PathVariable Long blogId
     ) {
         blogService.increaseViewCount(blogId);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -153,7 +150,7 @@ public class BlogController {
     @ApiOperation(value = "增加博客的点赞量", notes = "增加博客的点赞量;\nauthor：RSW")
     @PutMapping("/increase-like-number/{blogId}")
     public ResponseEntity<Void> increaseLikeCount (
-            @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
+            @ApiParam(name = "blogId", value = "博客id", required = true) @PathVariable Long blogId
     ) {
         blogService.increaseLikeCount(blogId);
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -44,8 +44,7 @@ public class BlogLabelController {
     @ApiOperation(value = "删除单个博客标签", notes = "根据博客标签id删除;\nauthor：RSW")
     @DeleteMapping("/{blogLabelId}")
     public ResponseEntity<Void> deleteBlogType (
-            @ApiParam(name = "blogLabelId", value = "博客标签id", required = true)
-            @Valid @PathVariable Long blogLabelId ) {
+            @ApiParam(name = "blogLabelId", value = "博客标签id", required = true) @PathVariable Long blogLabelId ) {
         blogLabelService.deleteBlogLabel(blogLabelId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

@@ -43,8 +43,7 @@ public class LeaveWordController {
     @ApiOperation(value = "删除单个留言信息",notes="根据留言id删除对应留言信息; \n author：JQJ")
     @DeleteMapping("{leaveWordId}")
     public ResponseEntity<Void> deleteLeaveWord (
-            @ApiParam(name = "leaveWordId", value = "要删除留言id", required = true)
-            @Valid @PathVariable("leaveWordId") Long leaveWordId ){
+            @ApiParam(name = "leaveWordId", value = "要删除留言id", required = true) @PathVariable("leaveWordId") Long leaveWordId ){
         this.leaveWordService.deleteLeaveWord(leaveWordId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

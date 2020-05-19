@@ -42,7 +42,7 @@ public class UserController {
     @DeleteMapping("/{visitorId}")
     public ResponseEntity<Void> deleteVisitor (
             @ApiParam(name = "visitorId", value = "博客id", required = true)
-            @Valid @PathVariable("visitorId") Long visitorId ) {
+            @PathVariable("visitorId") Long visitorId ) {
         this.userService.deleteVisitor(visitorId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/{visitorId}")
     public ResponseEntity<User> queryVisitorById (
             @ApiParam(name = "visitorId", value = "用户id", required = true)
-            @Valid @PathVariable("visitorId") Long visitorId ) {
+            @PathVariable("visitorId") Long visitorId ) {
         User user = this.userService.queryVisitor(visitorId);
         return ResponseEntity.ok(user);
     }

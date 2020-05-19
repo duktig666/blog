@@ -32,8 +32,7 @@ public class ApplyLinkController {
     @ApiOperation(value = "新增友情链接信息",notes="新增一条友情链接信息; \n author：JQJ")
     @PostMapping
     public ResponseEntity<Void> saveApplyLink (
-            @Validated
-            @ApiParam(name = "applyLink", value = "新增的友情链接信息", required = true) ApplyLink applyLink) {
+            @Validated @ApiParam(name = "applyLink", value = "新增的友情链接信息", required = true) ApplyLink applyLink) {
         this.applyLinkService.saveApplyLink(applyLink);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -41,8 +40,7 @@ public class ApplyLinkController {
     @ApiOperation(value = "删除单个友情链接信息",notes="根据友情链接id删除对应友情链接信息; \n author：JQJ")
     @DeleteMapping("{applyLinkId}")
     public ResponseEntity<Void> deleteApplyLink (
-            @ApiParam(name = "applyLinkId", value = "友情链接", required = true)
-            @Valid @PathVariable("applyLinkId") Long applyLinkId ){
+            @ApiParam(name = "applyLinkId", value = "友情链接", required = true) @PathVariable("applyLinkId") Long applyLinkId ){
         this.applyLinkService.deleteApplyLink(applyLinkId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -50,15 +48,14 @@ public class ApplyLinkController {
     @ApiOperation(value = "批量删除友情链接信息",notes="根据友情链接id集合批量删除友情链接信息; \n author：JQJ")
     @ApiParam(name = "applyLinkIds", value = "友情链接id集合", required = true)
     @DeleteMapping("/ids")
-    public ResponseEntity<Void> deleteApplyLinks (@Valid @RequestParam("applyLinkIds") List<Long> applyLinkIds ){
+    public ResponseEntity<Void> deleteApplyLinks ( @RequestParam("applyLinkIds") List<Long> applyLinkIds ){
         this.applyLinkService.deleteApplyLinks(applyLinkIds);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @ApiOperation(value = "修改友情链接信息",notes="根据前台传入的信息进行修改对应友情链接信息; \n author：JQJ")
     @PutMapping
     public ResponseEntity<String> updateApplyLink (
-            @ApiParam(name = "applyLink", value = "修改的友情链接信息", required = true)
-            @Validated(ApplyLink.UpdateGroup.class) ApplyLink applyLink ){
+            @ApiParam(name = "applyLink", value = "修改的友情链接信息", required = true) @Validated(ApplyLink.UpdateGroup.class) ApplyLink applyLink ){
         this.applyLinkService.updateApplyLink(applyLink);
 
         // 如果修改状态成功，返回传入的状态信息
@@ -72,8 +69,7 @@ public class ApplyLinkController {
     @ApiOperation(value = "查询一条友情链接信息",notes="根据友情链接id查询对应友情链接信息; \n author：JQJ")
     @GetMapping("{applyLinkId}")
     public ResponseEntity<ApplyLink> queryApplyLinkById (
-            @ApiParam(name = "applyLinkId", value = "友情链接id", required = true)
-            @Valid @PathVariable("applyLinkId") Long applyLinkId ){
+            @ApiParam(name = "applyLinkId", value = "友情链接id", required = true) @PathVariable("applyLinkId") Long applyLinkId ){
         ApplyLink applyLink = this.applyLinkService.queryApplyLinkById(applyLinkId);
         return ResponseEntity.ok(applyLink);
     }

@@ -48,8 +48,7 @@ public class BlogTypeController {
     @ApiOperation(value = "删除单个博客类型", notes = "根据博客类型id删除;\nauthor：RSW")
     @DeleteMapping("/{blogTypeId}")
     public ResponseEntity<Void> deleteBlogType (
-            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true)
-            @Valid @PathVariable Long blogTypeId ) {
+            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true) @PathVariable Long blogTypeId ) {
         blogTypeService.deleteBlogType(blogTypeId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -75,8 +74,7 @@ public class BlogTypeController {
     @ApiOperation(value = "查询一条博客类型信息", notes = "根据博客类型id查询;\nauthor：RSW")
     @GetMapping("/{blogTypeId}")
     public ResponseEntity<BlogType> queryBlogById (
-            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true)
-            @Valid @PathVariable Long blogTypeId ) {
+            @ApiParam(name = "blogTypeId", value = "博客类型id", required = true) @PathVariable Long blogTypeId ) {
         return ResponseEntity.ok(blogTypeService.queryBlogTypeById(blogTypeId));
     }
 

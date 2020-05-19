@@ -44,7 +44,7 @@ public class ObserveController {
     @ApiOperation(value = "删除评论", notes = "根据评论id，删除评论;\nauthor：RSW")
     @DeleteMapping("{observeId}")
     public ResponseEntity<Void> deleteObserve (
-            @ApiParam(name = "observeId", value = "评论id", required = true) @Valid @PathVariable Long observeId
+            @ApiParam(name = "observeId", value = "评论id", required = true) @PathVariable Long observeId
     ) {
         observeService.deleteObserve(observeId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -62,7 +62,7 @@ public class ObserveController {
     @ApiOperation(value = "查询一篇博客的所有评论信息", notes = "根据博客id，查询此博客的所有评论信息（链表类型的数据）;\nauthor：RSW")
     @GetMapping("/{blogId}")
     public ResponseEntity<List<ObserveNodeBO>> queryObserveByBlogId (
-            @ApiParam(name = "blogId", value = "博客id", required = true) @Valid @PathVariable Long blogId
+            @ApiParam(name = "blogId", value = "博客id", required = true) @PathVariable Long blogId
     ) {
         return ResponseEntity.ok(observeService.queryObserveByBlogId(blogId));
     }
@@ -70,7 +70,7 @@ public class ObserveController {
     @ApiOperation(value = "根据评论id查询用户信息", notes = "评论信息，携带用户信息;\nauthor：RSW")
     @GetMapping("/user/{observeId}")
     public ResponseEntity<ObserveUserBo> queryObserveUserById (
-            @ApiParam(name = "observeId", value = "评论id", required = true)@Valid @PathVariable Long observeId
+            @ApiParam(name = "observeId", value = "评论id", required = true)@PathVariable Long observeId
     ) {
         return ResponseEntity.ok(observeService.queryObserveUserById(observeId));
     }
