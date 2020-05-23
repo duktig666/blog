@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Date: 2020/4/11 21:18
  **/
 
-@Controller
+@RestController
 @RequestMapping("/api/file")
 @Api(tags = "分布式文件模块")
 public class UploadController {
