@@ -9,13 +9,13 @@ import org.springframework.jmx.support.RegistrationPolicy;
 /**
  * Description： FastDFS配置类
  *
+ * 解决jmx重复注册bean的问题
  * @author jiaoqianjin
  * Date: 2020/4/11 20:28
  **/
 
 @Configuration
 @Import(FdfsClientConfig.class)
-// 解决jmx重复注册bean的问题
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 public class FastClientImporterConfig {
 
