@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 功能描述： 测试redis的连接
+ * 功能描述： redis关于聊天的工具类
  *
  * @author RenShiWei
- * Date: 2020/2/7 14:13
+ * Date: 2020/5/26 14:13
  **/
 @Component
 @Slf4j

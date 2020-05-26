@@ -34,7 +34,7 @@ import java.util.List;
  * 功能描述：TextWebSocketFrame: 在netty中，用于为websocket专门处理文本的对象，frame是消息的载体
  *
  * @author RenShiWei
- * Date: 2020/3/9 20:57
+ * Date: 2020/5/26 20:57
  **/
 @Slf4j
 public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {

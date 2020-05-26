@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  * 功能描述：消息实体的扩展类
  *
  * @author RenShiWei
- * Date: 2020/3/13 12:35
+ * Date: 2020/5/26 20:57
  **/
 @EqualsAndHashCode(callSuper = true)
 @Data

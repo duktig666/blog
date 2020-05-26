@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 功能描述：用户id和channel的关联关系的处理类
  *
  * @author RenShiWei
- * Date: 2020/3/12 21:51
+ * Date: 2020/5/26 20:57
  **/
 @Slf4j
 public class UserChannelRel {

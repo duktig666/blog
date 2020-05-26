@@ -6,7 +6,7 @@ import lombok.Getter;
  * 功能描述：消息签收的枚举类
  *
  * @author RenShiWei
- * Date: 2020/3/13 12:15
+ * Date: Date: 2020/5/26 20:57
  **/
 public enum MsgSignFlagEnum {
     /** 消息是否签收 */

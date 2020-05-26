@@ -10,8 +10,7 @@ import java.util.Date;
  * class description：聊天信息类
  *
  * @author rsw
- * Date: 2020/2/5
- * Time: 21:27
+ * Date: 2020/5/26 20:57
  **/
 @Data
 public class ChatVO implements Serializable {

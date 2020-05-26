@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * 功能描述：聊天信息类型验证
  *
  * @author RenShiWei
- * Date: 2020/2/6 15:56
+ * Date: 2020/5/26 20:57
  **/
 public class ChatTypeVerificationUtil {
 

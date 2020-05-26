@@ -4,7 +4,7 @@ package com.blog.module.websocket.enums;
  * 功能描述：客户端发送消息的动作类型
  *
  * @author RenShiWei
- * Date: 2020/3/9 20:57
+ * Date: 2020/5/26 20:57
  **/
 public enum MsgActionEnum {
     /** 第一次(或重连)初始化连接 */

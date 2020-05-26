@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
  * 功能描述：netty整合websocket的服务端
  *
  * @author RenShiWei
- * Date: 2020/3/9 20:57
+ * Date: 2020/5/26 20:57
  **/
 @Slf4j
 @Configuration
