@@ -71,3 +71,6 @@ fdfs:
     height: 60
   tracker-list: # tracker地址：你的虚拟机服务器地址+端口（默认是22122）
     - 118.89.143.27:22122
+
+netty:
+  port: 10101      #netty运行时的端口
