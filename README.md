@@ -28,6 +28,7 @@
 - HTML + CSS + JS
 - jQuery + Ajax
 - H5方式引用 Vue + Element UI + Vuetify
+- H5解析Editor.md
 
 ### 后台
 
@@ -35,6 +36,7 @@
 - Element UI
 - Vuetify
 - axios
+- 支持Markdown编辑器，采用[Editor.md](https://pandao.github.io/editor.md/index.html)
 
 ## 文件夹结构
 
