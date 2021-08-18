@@ -26,7 +26,7 @@
 ### 前台
 
 - HTML + CSS + JS
-- jQuery 
+- jQuery + Ajax
 - H5方式引用 Vue + Element UI + Vuetify
 
 ### 后台
@@ -34,6 +34,7 @@
 - Vue
 - Element UI
 - Vuetify
+- axios
 
 ## 文件夹结构
 
@@ -89,5 +90,19 @@
 |-- vue.config.js  cli配置文件
 ```
 
+## 部分UI
+
+![首页截图头部](./doc/img/首页截图头部.png)
+
+
+
+![首页截图尾部](./doc/img/首页截图尾部.png)
+
+
+
 ## 其他
+
+- [博客管理系统需求分析](./doc/博客管理系统需求分析.md)
+- [个人博客参考网站](./doc/个人博客参考网站.md)
+- 其他更多内容请到【[blog仓库的doc文件夹](https://github.com/duktig666/blog/tree/master/doc)】参看
 
